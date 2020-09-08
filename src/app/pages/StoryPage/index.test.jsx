@@ -3,7 +3,7 @@ import React from 'react';
 import { StaticRouter } from 'react-router-dom';
 
 // test helpers
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import assocPath from 'ramda/src/assocPath';
 import fetchMock from 'fetch-mock';
 import { matchSnapshotAsync } from '@bbc/psammead-test-helpers';
@@ -27,6 +27,9 @@ import igboSecondaryColumnData from '#data/igbo/secondaryColumn/index.json';
 import ukrainianInRussianPageData from '#data/ukrainian/cpsAssets/news-russian-23333960.json';
 import ukrainianSecondaryColumnData from '#data/ukrainian/secondaryColumn/index.json';
 import ukrainianMostReadData from '#data/ukrainian/mostRead/index.json';
+import persianPageData from '#data/persian/legacyAssets/iran/2009/09/090920_bd_pp_ir88_timeline_election.json';
+import persianMostReadData from '#data/persian/mostRead/index.json';
+import persianSecondaryColumnData from '#data/persian/secondaryColumn/index.json';
 
 fetchMock.config.overwriteRoutes = false; // http://www.wheresrhys.co.uk/fetch-mock/#usageconfiguration allows us to mock the same endpoint multiple times
 
@@ -308,5 +311,38 @@ describe('Story Page', () => {
 
     const storyPageAds = document.getElementById('sty-ads');
     expect(storyPageAds).toBeInTheDocument();
+  });
+
+  it('should render a very large asset in under 3 seconds', async () => {
+    // prevent test failing due to React warnings for this asset
+    // issue raised to investigate: https://github.com/bbc/simorgh/issues/7756
+    const originalConsoleError = console.error;
+    console.error = () => {};
+
+    fetchMock.mock('http://localhost/some-cps-sty-path.json', persianPageData);
+    fetchMock.mock(
+      'http://localhost/persian/mostread.json',
+      persianMostReadData,
+    );
+    fetchMock.mock(
+      'http://localhost/persian/sty-secondary-column.json',
+      persianSecondaryColumnData,
+    );
+
+    const timeBefore = Date.now();
+
+    const { pageData } = await getInitialData({
+      path: '/some-cps-sty-path',
+      service: 'persian',
+      pageType,
+    });
+
+    render(<Page pageData={pageData} service="persian" />);
+
+    const timeAfter = Date.now();
+    const renderDuration = timeAfter - timeBefore;
+    expect(renderDuration).toBeLessThan(3000);
+
+    console.error = originalConsoleError;
   });
 });
