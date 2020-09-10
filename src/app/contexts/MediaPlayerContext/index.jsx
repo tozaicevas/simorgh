@@ -8,6 +8,7 @@ const MediaPlayerContextProvider = ({ children }) => {
   const [showMediaPlayer, setShowMediaPlayer] = useState(false);
   const [playerIsInitialised, setPlayerIsInitialised] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMediaReady, setIsMediaReady] = useState(false);
   const toggleMediaPlayer = () => {
     setIsPlaying(!showMediaPlayer);
     setShowMediaPlayer(!showMediaPlayer);
@@ -41,6 +42,7 @@ const MediaPlayerContextProvider = ({ children }) => {
         playerIsInitialised,
         setIsPlaying,
         isPlaying,
+        setIsMediaReady,
       }}
     >
       {children}

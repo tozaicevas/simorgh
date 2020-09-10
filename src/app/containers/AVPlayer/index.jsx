@@ -7,6 +7,7 @@ import {
 import pathOr from 'ramda/src/pathOr';
 import { RequestContext } from '#contexts/RequestContext';
 import { ServiceContext } from '#contexts/ServiceContext';
+import { MediaPlayerContext } from '#contexts/MediaPlayerContext';
 
 const AVPlayer = ({
   assetId,
@@ -20,6 +21,7 @@ const AVPlayer = ({
 }) => {
   const { translations, service } = useContext(ServiceContext);
   const { isAmp, platform } = useContext(RequestContext);
+  const { setIsMediaReady } = useContext(MediaPlayerContext);
 
   const isValidPlatform = ['amp', 'canonical'].includes(platform);
   const mediaInfo = {
@@ -55,6 +57,12 @@ const AVPlayer = ({
           mediaInfo={mediaInfo}
           noJsMessage={noJsMessage}
           noJsClassName="no-js"
+          // acceptableEventOrigins={['polling.test.bbc.co.uk']}
+          // onMediaInitialised={
+          //   () => console.log('media is initialised')
+          //   // setIsMediaReady(true)
+          // }
+          // onMediaPlaying={() => console.log('media is playing')}
         />
       )}
     </div>
