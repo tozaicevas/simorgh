@@ -1,6 +1,6 @@
 import { runCommonCrossPlatformTests } from '../../common';
 
-export default service => {
+export default () => {
   runCommonCrossPlatformTests(service);
 
   it('I can see the headline', () => {
