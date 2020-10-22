@@ -9,7 +9,7 @@ import { INCLUDE_RENDERED } from '#lib/logger.const';
 import { RequestContext } from '#contexts/RequestContext';
 import { ServiceContext } from '#contexts/ServiceContext';
 import useToggle from '#hooks/useToggle';
-import { MediumGridWithMargin } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#app/components/Grid';
 
 import Canonical from './canonical';
 import Idt2Canonical from './canonical/Idt2';

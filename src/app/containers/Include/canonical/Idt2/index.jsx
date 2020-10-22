@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { Img } from '@bbc/psammead-image';
 import { GEL_SPACING_QUIN } from '@bbc/gel-foundations/spacings';
-import { MediumGridWithMargin } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#app/components/Grid';
 
 const IncludeGrid = styled(MediumGridWithMargin)`
   display: grid;

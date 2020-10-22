@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import { number, bool, string } from 'prop-types';
 import Timestamp from '@bbc/psammead-timestamp-container';
-import { PopOutGridItemMedium, MediumGridWithMargin } from '#lib/styledGrid';
+import {
+  MediumGridWithMargin,
+  PopOutGridItemMedium,
+} from '#app/components/Grid';
 import { ServiceContext } from '#contexts/ServiceContext';
 import { formatDateNumeric } from './timeFormats';
 import {

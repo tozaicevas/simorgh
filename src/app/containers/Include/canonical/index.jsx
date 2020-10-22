@@ -4,7 +4,7 @@ import { string, number } from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
 import { GEL_SPACING_QUIN } from '@bbc/gel-foundations/spacings';
-import { MediumGridWithMargin } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#app/components/Grid';
 
 /**
  * Prevent Includes from being wider than their parent, whilst

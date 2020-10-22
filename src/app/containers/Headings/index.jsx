@@ -8,7 +8,10 @@ import { headlineModelPropTypes } from '#models/propTypes/headline';
 import Fragment from '../Fragment';
 import Blocks from '../Blocks';
 import idSanitiser from '#lib/utilities/idSanitiser';
-import { MediumGridWithMargin, LargeGridWithMargin } from '#lib/styledGrid';
+import {
+  MediumGridWithMargin,
+  LargeGridWithMargin,
+} from '#app/components/Grid';
 
 const StyledHeadline = styled(Headline)`
   :focus {

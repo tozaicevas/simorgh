@@ -27,10 +27,8 @@ import SkipLinkWrapper from '../../components/SkipLinkWrapper';
 import { storyItem } from '#models/propTypes/storyItem';
 import { RequestContext } from '#contexts/RequestContext';
 import { ServiceContext } from '#contexts/ServiceContext';
-import {
-  GridWrapper as LegacyGridWrapper,
-  LargeGridWithMargin,
-} from '#lib/styledGrid';
+import { GridWrapper as LegacyGridWrapper } from '#lib/styledGrid';
+import { LargeGridWithMargin } from '#app/components/Grid';
 import { gelGridMargin } from '#app/lib/layoutGrid';
 
 const constrainedLargeGridColumns = {

@@ -15,14 +15,14 @@ import {
 } from '@bbc/gel-foundations/spacings';
 
 import MediaPlayerContainer from '../MediaPlayer';
-import { GridItemConstrainedLargeNoMargin } from '#lib/styledGrid';
+import { LargeGridWithoutMargin } from '#app/components/Grid';
 import {
   mediaPlayerPropTypes,
   emptyBlockArrayDefaultProps,
 } from '#models/propTypes';
 import filterForBlockType from '#lib/utilities/blockHandlers';
 
-const Wrapper = styled(GridItemConstrainedLargeNoMargin)`
+const Wrapper = styled(LargeGridWithoutMargin)`
   margin-top: ${GEL_SPACING};
 
   ${props =>

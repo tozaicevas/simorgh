@@ -2,7 +2,7 @@ import React from 'react';
 import { string, shape, number } from 'prop-types';
 import styled from 'styled-components';
 import { AmpImg } from '@bbc/psammead-image';
-import { MediumGridWithMargin } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#app/components/Grid';
 
 const IncludeGrid = styled(MediumGridWithMargin)`
   display: grid;

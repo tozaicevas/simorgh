@@ -6,7 +6,7 @@ import { arrayOf, shape, oneOf } from 'prop-types';
 import { ServiceContext } from '#contexts/ServiceContext';
 import Blocks from '../Blocks';
 import listItem, { ListItemPropTypes } from '../BulletedListItem';
-import { MediumGridWithMargin } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#app/components/Grid';
 
 const componentsToRender = { listItem };
 

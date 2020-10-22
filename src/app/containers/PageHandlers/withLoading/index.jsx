@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { bool, element } from 'prop-types';
 import styled from 'styled-components';
-import { GridWrapper, MediumGridWithMargin } from '#lib/styledGrid';
+import { GridWrapper } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#app/components/Grid';
 
 let timeout;
 const LoadingMain = styled.main`

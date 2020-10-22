@@ -10,7 +10,7 @@ import { storyItem } from '#models/propTypes/storyItem';
 import { ServiceContext } from '#contexts/ServiceContext';
 import useToggle from '#hooks/useToggle';
 import CpsOnwardJourney from '../CpsOnwardJourney';
-import { MediumGridWithoutMargin } from '#lib/styledGrid';
+import { MediumGridWithoutMargin } from '#app/components/Grid';
 import RecommendationsPromo from './RecommendationsPromo';
 import RecommendationsPromoList from './RecommendationsPromoList';
 

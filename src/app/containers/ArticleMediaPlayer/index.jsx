@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import MediaPlayerContainer from '../MediaPlayer';
 import { RequestContext } from '#contexts/RequestContext';
-import { MediumGridWithoutMargin } from '#lib/styledGrid';
+import { MediumGridWithoutMargin } from '#app/components/Grid';
 import {
   mediaPlayerPropTypes,
   emptyBlockArrayDefaultProps,
