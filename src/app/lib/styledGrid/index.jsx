@@ -25,32 +25,148 @@ import {
   gridContainerSmallCss,
   gridContainerMediumCss,
   gridContainerLargeCss,
+  specifiedOrMaximum,
+  gelGridMargin,
 } from '../layoutGrid';
+import Grid, { GelPageGrid } from '#app/components/Grid';
 
 export const GridWrapper = styled.div`
   ${layoutGridWrapper};
   padding-bottom: ${GEL_SPACING_QUAD};
 `;
 
-export const GridItemConstrainedSmall = styled.div`
-  ${layoutGridItemSmall};
+export const GridItemConstrainedSmall = styled(props => (
+  <Grid
+    item
+    startOffset={{
+      group0: 1,
+      group1: 1,
+      group2: 1,
+      group3: 1,
+      group4: 3,
+      group5: 6,
+    }}
+    columns={{
+      group0: 6,
+      group1: 6,
+      group2: 4,
+      group3: 5,
+      group4: 4,
+      group5: 8,
+    }}
+    {...props}
+  />
+))`
+  ${layoutGridItemSmall}
 `;
 
-export const GridItemConstrainedMedium = styled.div`
-  ${layoutGridItemMedium};
-`;
+export const GridItemConstrainedMedium = props => (
+  <Grid
+    item
+    margins={{
+      group0: true,
+      group1: true,
+      group2: true,
+      group3: true,
+      group4: false,
+      group5: false,
+    }}
+    startOffset={{
+      group0: 1,
+      group1: 1,
+      group2: 1,
+      group3: 1,
+      group4: 3,
+      group5: props.gridColumnStart,
+    }}
+    columns={{
+      group0: 6,
+      group1: 6,
+      group2: 6,
+      group3: 5,
+      group4: 5,
+      group5: specifiedOrMaximum(props.gridSpan, 22),
+    }}
+    {...props}
+  />
+);
 
-export const GridItemConstrainedMediumNoMargin = styled.div`
-  ${layoutGridItemMediumNoMargin};
-`;
+export const GridItemConstrainedMediumNoMargin = props => (
+  <Grid
+    item
+    startOffset={{
+      group0: 1,
+      group1: 1,
+      group2: 1,
+      group3: 1,
+      group4: 3,
+      group5: props.gridColumnStart,
+    }}
+    columns={{
+      group0: 6,
+      group1: 6,
+      group2: 6,
+      group3: 6,
+      group4: 5,
+      group5: specifiedOrMaximum(props.gridSpan, 22),
+    }}
+    {...props}
+  />
+);
 
-export const GridItemConstrainedLarge = styled.div`
-  ${layoutGridItemLarge};
-`;
+export const GridItemConstrainedLarge = props => (
+  <Grid
+    item
+    margins={{
+      group0: true,
+      group1: true,
+      group2: true,
+      group3: true,
+      group4: false,
+      group5: false,
+    }}
+    startOffset={{
+      group0: 1,
+      group1: 1,
+      group2: 1,
+      group3: 1,
+      group4: 3,
+      group5: 6,
+    }}
+    columns={{
+      group0: 6,
+      group1: 6,
+      group2: 6,
+      group3: 6,
+      group4: 6,
+      group5: 12,
+    }}
+    {...props}
+  />
+);
 
-export const GridItemConstrainedLargeNoMargin = styled.div`
-  ${layoutGridItemLargeNoMargin};
-`;
+export const GridItemConstrainedLargeNoMargin = props => (
+  <Grid
+    item
+    startOffset={{
+      group0: 1,
+      group1: 1,
+      group2: 1,
+      group3: 1,
+      group4: 3,
+      group5: 6,
+    }}
+    columns={{
+      group0: 6,
+      group1: 6,
+      group2: 6,
+      group3: 6,
+      group4: 6,
+      group5: 12,
+    }}
+    {...props}
+  />
+);
 
 export const GridItemConstrainedLargeWithTopMargin = styled(
   GridItemConstrainedLarge,
