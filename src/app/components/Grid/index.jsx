@@ -46,6 +46,23 @@ export const CPSPageGrid = ({ children, ...props }) => (
   </StyledCPSPageGrid>
 );
 
+export const ArticlePageGrid = ({ children, ...props }) => (
+  <Grid
+    enableGelGutters
+    columns={{
+      group0: 6,
+      group1: 6,
+      group2: 6,
+      group3: 6,
+      group4: 8,
+      group5: 20,
+    }}
+    {...props}
+  >
+    {children}
+  </Grid>
+);
+
 CPSPageGrid.propTypes = {
   children: node.isRequired,
 };

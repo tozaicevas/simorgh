@@ -28,7 +28,7 @@ import {
   getFirstPublished,
   getLastPublished,
 } from '#lib/utilities/parseAssetData';
-import { GridWrapper } from '#lib/styledGrid';
+import { GelPageGrid } from '#app/components/Grid';
 
 const PhotoGalleryPage = ({ pageData }) => {
   const title = path(['promo', 'headlines', 'headline'], pageData);
@@ -103,10 +103,20 @@ const PhotoGalleryPage = ({ pageData }) => {
       <ChartbeatAnalytics data={pageData} />
       <ComscoreAnalytics />
       <main role="main">
-        <GridWrapper>
+        <GelPageGrid
+          enableGelGutters
+          columns={{
+            group0: 6,
+            group1: 6,
+            group2: 6,
+            group3: 6,
+            group4: 8,
+            group5: 20,
+          }}
+        >
           <Blocks blocks={blocks} componentsToRender={componentsToRender} />
           <CpsRelatedContent content={relatedContent} enableGridWrapper />
-        </GridWrapper>
+        </GelPageGrid>
       </main>
     </>
   );

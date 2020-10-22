@@ -76,34 +76,11 @@ export const gelGridMargin = css`
 */
 
 export const layoutGridWrapper = css`
-  margin: 0 auto;
-
-  @media (max-width: ${GEL_GROUP_2_SCREEN_WIDTH_MAX}) {
-    grid-column-gap: ${GEL_GUTTER_BELOW_600PX};
-  }
-  @media (min-width: ${GEL_GROUP_3_SCREEN_WIDTH_MIN}) {
-    grid-column-gap: ${GEL_GUTTER_ABOVE_600PX};
-  }
-  @media (max-width: ${GEL_GROUP_3_SCREEN_WIDTH_MAX}) {
-    grid-template-columns: repeat(6, 1fr);
-  }
   @media (min-width: ${GEL_GROUP_4_SCREEN_WIDTH_MIN}) and (max-width: ${GEL_GROUP_4_SCREEN_WIDTH_MAX}) {
-    grid-template-columns:
-      1fr repeat(8, minmax(0, ${group4ColWidth}))
-      1fr;
     max-width: ${group4WrapperMaxWidth};
   }
   @media (min-width: ${GEL_GROUP_5_SCREEN_WIDTH_MIN}) {
-    grid-template-columns:
-      1fr repeat(20, minmax(0, ${group5ColWidth}))
-      1fr;
     max-width: ${group5WrapperMaxWidth};
-  }
-
-  @supports (display: grid) {
-    display: grid;
-    max-width: initial;
-    margin: initial;
   }
 `;
 

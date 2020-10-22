@@ -106,7 +106,7 @@ export const GridItemConstrainedMediumNoMargin = props => (
       group0: 6,
       group1: 6,
       group2: 6,
-      group3: 6,
+      group3: 5,
       group4: 5,
       group5: specifiedOrMaximum(props.gridSpan, 22),
     }}
@@ -208,9 +208,8 @@ export const NestedGridParentSmall = styled.div`
 // The max-height must be 0 at Group 5 breakpoints so that
 // the item does not force the following sibling item downwards.
 
-const PopOutAtGroup5 = styled.div`
-  ${layoutGridItemMedium}
-  @supports(display: grid) {
+const PopOutAtGroup5 = styled(GridItemConstrainedMedium)`
+  @supports (display: grid) {
     @media (min-width: ${GEL_GROUP_5_SCREEN_WIDTH_MIN}) {
       max-height: 0; /* [1] */
       padding-top: 0.25rem;

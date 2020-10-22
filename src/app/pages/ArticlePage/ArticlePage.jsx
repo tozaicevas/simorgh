@@ -46,6 +46,7 @@ import {
   getMentions,
   getLang,
 } from '#lib/utilities/parseAssetData';
+import Grid, { GelPageGrid } from '#app/components/Grid';
 
 const componentsToRender = {
   headline: headings,
@@ -125,12 +126,22 @@ const ArticlePage = ({ pageData, mostReadEndpointOverride }) => {
         aboutTags={aboutTags}
       />
       <StyledMain role="main">
-        <GridWrapper>
+        <GelPageGrid
+          enableGelGutters
+          columns={{
+            group0: 6,
+            group1: 6,
+            group2: 6,
+            group3: 6,
+            group4: 8,
+            group5: 20,
+          }}
+        >
           <Blocks
             blocks={path(['content', 'model', 'blocks'], pageData)}
             componentsToRender={componentsToRender}
           />
-        </GridWrapper>
+        </GelPageGrid>
       </StyledMain>
       <MostReadContainer
         mostReadEndpointOverride={mostReadEndpointOverride}
