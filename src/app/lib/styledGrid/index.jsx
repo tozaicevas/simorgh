@@ -44,7 +44,7 @@ export const GridItemConstrainedSmall = styled(props => (
       group2: 1,
       group3: 1,
       group4: 3,
-      group5: 6,
+      group5: 5,
     }}
     columns={{
       group0: 6,
@@ -131,7 +131,7 @@ export const GridItemConstrainedLarge = props => (
       group2: 1,
       group3: 1,
       group4: 3,
-      group5: 6,
+      group5: 5,
     }}
     columns={{
       group0: 6,
@@ -154,7 +154,7 @@ export const GridItemConstrainedLargeNoMargin = props => (
       group2: 1,
       group3: 1,
       group4: 3,
-      group5: 6,
+      group5: 5,
     }}
     columns={{
       group0: 6,
@@ -267,16 +267,16 @@ PopOutGridItemMedium.propTypes = {
 };
 
 PopOutGridItemMedium.defaultProps = {
-  gridColumnStart: 2,
+  gridColumnStart: 1,
   gridSpan: 4,
 };
 
 GridItemConstrainedMediumNoMargin.defaultProps = {
-  gridColumnStart: 6,
+  gridColumnStart: 5,
   gridSpan: 10,
 };
 
 GridItemConstrainedMedium.defaultProps = {
-  gridColumnStart: 6,
+  gridColumnStart: 5,
   gridSpan: 10,
 };

@@ -36,6 +36,7 @@ import {
   getAboutTags,
 } from '#lib/utilities/parseAssetData';
 import { RequestContext } from '#contexts/RequestContext';
+import { GelPageGrid } from '#app/components/Grid';
 
 const MediaAssetPage = ({ pageData }) => {
   const { canonicalLink, isAmp } = useContext(RequestContext);
@@ -166,9 +167,21 @@ const MediaAssetPage = ({ pageData }) => {
         imageLocator={indexImageLocator}
       />
       <ATIAnalytics data={pageData} />
-      <StyledGrid as="main" role="main">
-        <Blocks blocks={blocks} componentsToRender={componentsToRender} />
-      </StyledGrid>
+      <main role="main">
+        <GelPageGrid
+          enableGelGutters
+          columns={{
+            group0: 6,
+            group1: 6,
+            group2: 6,
+            group3: 6,
+            group4: 8,
+            group5: 20,
+          }}
+        >
+          <Blocks blocks={blocks} componentsToRender={componentsToRender} />
+        </GelPageGrid>
+      </main>
       <CpsRelatedContent content={relatedContent} isMediaContent />
       {!isAmp && <MostWatchedContainer data={mostWatchedData} />}
     </>
