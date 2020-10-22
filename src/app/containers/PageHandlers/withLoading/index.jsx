@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { bool, element } from 'prop-types';
 import styled from 'styled-components';
-import { GridWrapper, GridItemConstrainedMedium } from '#lib/styledGrid';
+import { GridWrapper, MediumGridWithMargin } from '#lib/styledGrid';
 
 let timeout;
 const LoadingMain = styled.main`
@@ -25,9 +25,9 @@ const WithLoading = Component => {
     return (
       <LoadingMain role="main">
         <GridWrapper>
-          <GridItemConstrainedMedium>
+          <MediumGridWithMargin>
             {showLoading && <div data-testid="loading" />}
-          </GridItemConstrainedMedium>
+          </MediumGridWithMargin>
         </GridWrapper>
       </LoadingMain>
     );

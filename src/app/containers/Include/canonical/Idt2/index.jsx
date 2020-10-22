@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 import { Img } from '@bbc/psammead-image';
 import { GEL_SPACING_QUIN } from '@bbc/gel-foundations/spacings';
-import { GridItemConstrainedMedium } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#lib/styledGrid';
 
-const IncludeGrid = styled(GridItemConstrainedMedium)`
+const IncludeGrid = styled(MediumGridWithMargin)`
   display: grid;
 `;
 

@@ -15,10 +15,6 @@ import {
 import {
   layoutGridWrapper,
   layoutGridItemSmall,
-  layoutGridItemMedium,
-  layoutGridItemMediumNoMargin,
-  layoutGridItemLarge,
-  layoutGridItemLargeNoMargin,
   nestedGridItemSmallCss,
   nestedGridItemMediumCss,
   nestedGridItemLargeCss,
@@ -26,16 +22,15 @@ import {
   gridContainerMediumCss,
   gridContainerLargeCss,
   specifiedOrMaximum,
-  gelGridMargin,
 } from '../layoutGrid';
-import Grid, { GelPageGrid } from '#app/components/Grid';
+import Grid from '#app/components/Grid';
 
 export const GridWrapper = styled.div`
   ${layoutGridWrapper};
   padding-bottom: ${GEL_SPACING_QUAD};
 `;
 
-export const GridItemConstrainedSmall = styled(props => (
+export const SmallGridWithoutMargin = styled(props => (
   <Grid
     item
     startOffset={{
@@ -60,7 +55,7 @@ export const GridItemConstrainedSmall = styled(props => (
   ${layoutGridItemSmall}
 `;
 
-export const GridItemConstrainedMedium = props => (
+export const MediumGridWithMargin = props => (
   <Grid
     item
     margins={{
@@ -91,7 +86,7 @@ export const GridItemConstrainedMedium = props => (
   />
 );
 
-export const GridItemConstrainedMediumNoMargin = props => (
+export const MediumGridWithoutMargin = props => (
   <Grid
     item
     startOffset={{
@@ -114,7 +109,7 @@ export const GridItemConstrainedMediumNoMargin = props => (
   />
 );
 
-export const GridItemConstrainedLarge = props => (
+export const LargeGridWithMargin = props => (
   <Grid
     item
     margins={{
@@ -169,7 +164,7 @@ export const GridItemConstrainedLargeNoMargin = props => (
 );
 
 export const GridItemConstrainedLargeWithTopMargin = styled(
-  GridItemConstrainedLarge,
+  LargeGridWithMargin,
 )`
   margin-top: ${GEL_SPACING};
   @media (min-width: ${GEL_GROUP_2_SCREEN_WIDTH_MIN}) and (max-width: ${GEL_GROUP_2_SCREEN_WIDTH_MAX}) {
@@ -208,7 +203,7 @@ export const NestedGridParentSmall = styled.div`
 // The max-height must be 0 at Group 5 breakpoints so that
 // the item does not force the following sibling item downwards.
 
-const PopOutAtGroup5 = styled(GridItemConstrainedMedium)`
+const PopOutAtGroup5 = styled(MediumGridWithMargin)`
   @supports (display: grid) {
     @media (min-width: ${GEL_GROUP_5_SCREEN_WIDTH_MIN}) {
       max-height: 0; /* [1] */
@@ -271,12 +266,12 @@ PopOutGridItemMedium.defaultProps = {
   gridSpan: 4,
 };
 
-GridItemConstrainedMediumNoMargin.defaultProps = {
+MediumGridWithoutMargin.defaultProps = {
   gridColumnStart: 5,
   gridSpan: 10,
 };
 
-GridItemConstrainedMedium.defaultProps = {
+MediumGridWithMargin.defaultProps = {
   gridColumnStart: 5,
   gridSpan: 10,
 };

@@ -29,7 +29,7 @@ import { RequestContext } from '#contexts/RequestContext';
 import { ServiceContext } from '#contexts/ServiceContext';
 import {
   GridWrapper as LegacyGridWrapper,
-  GridItemConstrainedLarge,
+  LargeGridWithMargin,
 } from '#lib/styledGrid';
 import { gelGridMargin } from '#app/lib/layoutGrid';
 
@@ -88,7 +88,7 @@ const StyledConstrainedLargeGrid = styled(ConstrainedLargeGrid)`
   `}
 `;
 
-const LegacyGridItemConstrainedLarge = styled(GridItemConstrainedLarge)`
+const LegacyLargeGridWithMargin = styled(LargeGridWithMargin)`
   ${gridMarginSmall}
 `;
 
@@ -186,9 +186,7 @@ const CpsOnwardJourney = ({
       </Wrapper>
     ) : (
       <LegacyGridWrapper data-e2e={labelId} {...a11yAttributes}>
-        <LegacyGridItemConstrainedLarge>
-          {children}
-        </LegacyGridItemConstrainedLarge>
+        <LegacyLargeGridWithMargin>{children}</LegacyLargeGridWithMargin>
       </LegacyGridWrapper>
     );
 

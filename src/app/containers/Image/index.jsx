@@ -4,8 +4,8 @@ import { imageModelPropTypes } from '#models/propTypes/image';
 import ArticleFigure from '../ArticleFigure';
 import {
   GridItemConstrainedLargeNoMargin,
-  GridItemConstrainedMedium,
-  GridItemConstrainedSmall,
+  MediumGridWithMargin,
+  SmallGridWithoutMargin,
 } from '#lib/styledGrid';
 import { createSrcset } from '#lib/utilities/srcSet';
 import buildIChefURL from '#lib/utilities/ichefURL';
@@ -61,10 +61,10 @@ const ImageContainer = ({ blocks, position }) => {
   let Wrapper = GridItemConstrainedLargeNoMargin;
 
   if (height === width) {
-    Wrapper = GridItemConstrainedMedium;
+    Wrapper = MediumGridWithMargin;
   }
   if (height > width) {
-    Wrapper = GridItemConstrainedSmall;
+    Wrapper = SmallGridWithoutMargin;
   }
 
   // This grid contain will be refactored in

@@ -6,7 +6,7 @@ import fragment from '../Fragment';
 import InlineLink from '../InlineLink';
 import Inline from '../InlineContainer';
 import { paragraphModelPropTypes } from '#models/propTypes/paragraph';
-import { GridItemConstrainedMedium } from '#lib/styledGrid';
+import { MediumGridWithMargin } from '#lib/styledGrid';
 
 const componentsToRender = { fragment, urlLink: InlineLink, inline: Inline };
 
@@ -14,11 +14,11 @@ const ParagraphContainer = ({ blocks }) => {
   const { script, service } = useContext(ServiceContext);
 
   return (
-    <GridItemConstrainedMedium>
+    <MediumGridWithMargin>
       <Paragraph script={script} service={service}>
         <Blocks blocks={blocks} componentsToRender={componentsToRender} />
       </Paragraph>
-    </GridItemConstrainedMedium>
+    </MediumGridWithMargin>
   );
 };
 

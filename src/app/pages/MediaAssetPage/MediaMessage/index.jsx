@@ -15,7 +15,7 @@ import {
 
 import { MediaMessage } from '@bbc/psammead-media-player';
 import { ServiceContext } from '#contexts/ServiceContext';
-import { GridItemConstrainedLarge } from '#lib/styledGrid';
+import { LargeGridWithMargin } from '#lib/styledGrid';
 import nodeLogger from '#lib/logger.node';
 import { NO_TRANSLATION_FOUND } from '#lib/logger.const';
 
@@ -29,7 +29,7 @@ const StyledMessageContainer = styled.div`
   overflow: hidden;
 `;
 
-const Wrapper = styled(GridItemConstrainedLarge)`
+const Wrapper = styled(LargeGridWithMargin)`
   margin-top: ${GEL_SPACING};
   margin-bottom: ${GEL_SPACING_TRPL};
 

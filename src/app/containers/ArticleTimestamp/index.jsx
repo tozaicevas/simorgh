@@ -1,10 +1,7 @@
 import React, { useContext } from 'react';
 import { number, bool, string } from 'prop-types';
 import Timestamp from '@bbc/psammead-timestamp-container';
-import {
-  PopOutGridItemMedium,
-  GridItemConstrainedMedium,
-} from '#lib/styledGrid';
+import { PopOutGridItemMedium, MediumGridWithMargin } from '#lib/styledGrid';
 import { ServiceContext } from '#contexts/ServiceContext';
 import { formatDateNumeric } from './timeFormats';
 import {
@@ -65,7 +62,7 @@ const ArticleTimestamp = ({
     suffix: articleTimestampSuffix,
   };
 
-  const Wrapper = popOut ? PopOutGridItemMedium : GridItemConstrainedMedium;
+  const Wrapper = popOut ? PopOutGridItemMedium : MediumGridWithMargin;
 
   const displayLastUpdatedTimestamp = shouldDisplayLastUpdatedTimestamp({
     minutesTolerance,

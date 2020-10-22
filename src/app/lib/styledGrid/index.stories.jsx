@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
 import {
   GridWrapper,
-  GridItemConstrainedSmall,
-  GridItemConstrainedMedium,
-  GridItemConstrainedMediumNoMargin,
-  GridItemConstrainedLarge,
+  SmallGridWithoutMargin,
+  MediumGridWithMargin,
+  MediumGridWithoutMargin,
+  LargeGridWithMargin,
   GridItemConstrainedLargeNoMargin,
   NestedGridItemSmall,
   NestedGridItemMedium,
@@ -27,9 +27,9 @@ const ColouredDiv = styled.div`
 `;
 
 storiesOf('Grid Examples', module)
-  .add('GridItemConstrainedSmall', () => (
+  .add('SmallGridWithoutMargin', () => (
     <GridWrapper>
-      <GridItemConstrainedSmall>
+      <SmallGridWithoutMargin>
         <NestedGridItemSmall gridColumnStart="1" gridSpan={{ default: '1' }}>
           <ColouredDiv colour={red}>1/4 or 1/5 or 1/8</ColouredDiv>
         </NestedGridItemSmall>
@@ -54,12 +54,12 @@ storiesOf('Grid Examples', module)
         <NestedGridItemSmall gridColumnStart="1" gridSpan={{ default: '8' }}>
           <ColouredDiv colour={red}>4/4 or 5/5 or 8/8</ColouredDiv>
         </NestedGridItemSmall>
-      </GridItemConstrainedSmall>
+      </SmallGridWithoutMargin>
     </GridWrapper>
   ))
-  .add('GridItemConstrainedMedium', () => (
+  .add('MediumGridWithMargin', () => (
     <GridWrapper>
-      <GridItemConstrainedMedium>
+      <MediumGridWithMargin>
         <NestedGridItemMedium gridColumnStart="1" gridSpan={{ default: '1' }}>
           <ColouredDiv colour={red}>1/5 or 1/10</ColouredDiv>
         </NestedGridItemMedium>
@@ -90,12 +90,12 @@ storiesOf('Grid Examples', module)
         <NestedGridItemMedium gridColumnStart="1" gridSpan={{ default: '10' }}>
           <ColouredDiv colour={yellow}>5/5 or 10/10</ColouredDiv>
         </NestedGridItemMedium>
-      </GridItemConstrainedMedium>
+      </MediumGridWithMargin>
     </GridWrapper>
   ))
-  .add('GridItemConstrainedMediumNoMargin', () => (
+  .add('MediumGridWithoutMargin', () => (
     <GridWrapper>
-      <GridItemConstrainedMediumNoMargin>
+      <MediumGridWithoutMargin>
         <NestedGridItemMedium gridColumnStart="1" gridSpan={{ default: '1' }}>
           <ColouredDiv colour={red}>1/5 or 1/10</ColouredDiv>
         </NestedGridItemMedium>
@@ -126,12 +126,12 @@ storiesOf('Grid Examples', module)
         <NestedGridItemMedium gridColumnStart="1" gridSpan={{ default: '10' }}>
           <ColouredDiv colour={yellow}>5/5 or 10/10</ColouredDiv>
         </NestedGridItemMedium>
-      </GridItemConstrainedMediumNoMargin>
+      </MediumGridWithoutMargin>
     </GridWrapper>
   ))
-  .add('GridItemConstrainedLarge', () => (
+  .add('LargeGridWithMargin', () => (
     <GridWrapper>
-      <GridItemConstrainedLarge>
+      <LargeGridWithMargin>
         <NestedGridItemLarge gridColumnStart="1" gridSpan={{ default: '1' }}>
           <ColouredDiv colour={red}>1/6 or 1/12</ColouredDiv>
         </NestedGridItemLarge>
@@ -168,7 +168,7 @@ storiesOf('Grid Examples', module)
         <NestedGridItemLarge gridColumnStart="1" gridSpan={{ default: '12' }}>
           <ColouredDiv colour={blue}>6/6 or 12/12</ColouredDiv>
         </NestedGridItemLarge>
-      </GridItemConstrainedLarge>
+      </LargeGridWithMargin>
     </GridWrapper>
   ))
   .add('GridItemConstrainedLargeNoMargin', () => (
@@ -236,20 +236,20 @@ storiesOf('Grid Examples', module)
   ))
   .add('Group 5 breakpoint pop-out grid item', () => (
     <GridWrapper>
-      <GridItemConstrainedMedium>
-        <ColouredDiv colour={violet}>GridItemConstrainedMedium</ColouredDiv>
-      </GridItemConstrainedMedium>
+      <MediumGridWithMargin>
+        <ColouredDiv colour={violet}>MediumGridWithMargin</ColouredDiv>
+      </MediumGridWithMargin>
       <PopOutGridItemMedium>
         <ColouredDiv colour={blue}>Popout</ColouredDiv>
       </PopOutGridItemMedium>
-      <GridItemConstrainedMedium>
-        <ColouredDiv colour={violet}>GridItemConstrainedMedium</ColouredDiv>
-      </GridItemConstrainedMedium>
-      <GridItemConstrainedMedium>
-        <ColouredDiv colour={violet}>GridItemConstrainedMedium</ColouredDiv>
-      </GridItemConstrainedMedium>
-      <GridItemConstrainedMedium>
-        <ColouredDiv colour={violet}>GridItemConstrainedMedium</ColouredDiv>
-      </GridItemConstrainedMedium>
+      <MediumGridWithMargin>
+        <ColouredDiv colour={violet}>MediumGridWithMargin</ColouredDiv>
+      </MediumGridWithMargin>
+      <MediumGridWithMargin>
+        <ColouredDiv colour={violet}>MediumGridWithMargin</ColouredDiv>
+      </MediumGridWithMargin>
+      <MediumGridWithMargin>
+        <ColouredDiv colour={violet}>MediumGridWithMargin</ColouredDiv>
+      </MediumGridWithMargin>
     </GridWrapper>
   ));
