@@ -3,12 +3,10 @@ import styled from 'styled-components';
 import {
   GEL_SPACING_DBL,
   GEL_SPACING_TRPL,
-  GEL_SPACING_QUAD,
 } from '@bbc/gel-foundations/spacings';
 import { GEL_GROUP_4_SCREEN_WIDTH_MIN } from '@bbc/gel-foundations/breakpoints';
 import path from 'ramda/src/path';
 import pathOr from 'ramda/src/pathOr';
-import { GridWrapper } from '#lib/styledGrid';
 import { getImageParts } from '#app/routes/cpsAsset/getInitialData/convertToOptimoBlocks/blocks/image/helpers';
 import CpsMetadata from '#containers/CpsMetadata';
 import LinkedData from '#containers/LinkedData';
@@ -30,6 +28,7 @@ import {
   getFirstPublished,
   getLastPublished,
 } from '#lib/utilities/parseAssetData';
+import { GelPageGrid } from '#app/components/Grid';
 
 const PhotoGalleryPage = ({ pageData }) => {
   const title = path(['promo', 'headlines', 'headline'], pageData);
@@ -68,15 +67,6 @@ const PhotoGalleryPage = ({ pageData }) => {
     version: props => <MediaPlayer {...props} assetUri={assetUri} />,
   };
 
-  const StyledGrid = styled(GridWrapper)`
-    flex-grow: 1;
-    padding-bottom: ${GEL_SPACING_TRPL};
-
-    @media (min-width: ${GEL_GROUP_4_SCREEN_WIDTH_MIN}) {
-      padding-bottom: ${GEL_SPACING_QUAD};
-    }
-  `;
-
   const StyledTimestamp = styled(Timestamp)`
     padding-bottom: ${GEL_SPACING_DBL};
 
@@ -112,10 +102,22 @@ const PhotoGalleryPage = ({ pageData }) => {
       <ATIAnalytics data={pageData} />
       <ChartbeatAnalytics data={pageData} />
       <ComscoreAnalytics />
-      <StyledGrid as="main" role="main">
-        <Blocks blocks={blocks} componentsToRender={componentsToRender} />
-      </StyledGrid>
-      <CpsRelatedContent content={relatedContent} enableGridWrapper />
+      <main role="main">
+        <GelPageGrid
+          enableGelGutters
+          columns={{
+            group0: 6,
+            group1: 6,
+            group2: 6,
+            group3: 6,
+            group4: 8,
+            group5: 20,
+          }}
+        >
+          <Blocks blocks={blocks} componentsToRender={componentsToRender} />
+          <CpsRelatedContent content={relatedContent} enableGridWrapper />
+        </GelPageGrid>
+      </main>
     </>
   );
 };
