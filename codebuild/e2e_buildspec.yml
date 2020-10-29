@@ -14,7 +14,8 @@ phases:
       - npm run build
   build:
     commands:
-      - npm run cypress:ci
+      # - npm run cypress:ci
+      - test $CYPRESS_APP_ENV = "live" && npm run test:linkey || true
 reports:
   JunitReportsTest:
     files:
