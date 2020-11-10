@@ -29,15 +29,14 @@ jobs:
       - name: Start Simorgh Server
         run: nohup node build/server.js > /dev/null 2>&1 &
 
-      - name: Audit URLs using Lighthouse
+      - name: Run Lighthouse
         uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
             http://localhost:7080/news/articles/cn7k01xp8kxo
             http://localhost:7080/igbo
-          runs: 3
+          runs: 5
           configPath: './lighthouse/lighthouserc.json'
-          uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
 
 
