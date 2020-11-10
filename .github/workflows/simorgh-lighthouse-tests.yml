@@ -1,0 +1,42 @@
+name: Simorgh Lighthouse Tests
+
+on:
+  push:
+    branches:
+      - '**'
+      - '!latest'
+  pull_request:
+    branches:
+      - '**'
+      - '!latest'
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install & Build Simorgh
+        run: |
+          npm ci
+          npm run build:local
+
+      - name: Start Simorgh Server
+        run: nohup node build/server.js > /dev/null 2>&1 &
+
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v3
+        with:
+          urls: |
+            http://localhost:7080/news/articles/cn7k01xp8kxo
+            http://localhost:7080/igbo
+          configPath: './lighthouse/lighthouserc.json'
+          uploadArtifacts: true # save results as an action artifacts
+          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+
+

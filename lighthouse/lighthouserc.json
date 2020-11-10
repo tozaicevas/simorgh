@@ -1,0 +1,37 @@
+{
+  "ci": {
+    "assert": {
+      "includePassedAssertions": true,
+      "assertions": {
+        "categories:performance": [
+          "warn",
+          {
+            "aggregationMethod": "optimistic",
+            "minScore": 0.7
+          }
+        ],
+        "categories:accessibility": [
+          "error",
+          {
+            "aggregationMethod": "optimistic",
+            "minScore": 0.9
+          }
+        ],
+        "categories:best-practices": [
+          "error",
+          {
+            "aggregationMethod": "optimistic",
+            "minScore": 0.9
+          }
+        ],
+        "categories:seo": [
+          "error",
+          {
+            "aggregationMethod": "optimistic",
+            "minScore": 0.9
+          }
+        ]
+      }
+    }
+  }
+}
