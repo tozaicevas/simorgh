@@ -35,6 +35,7 @@ jobs:
           urls: |
             http://localhost:7080/news/articles/cn7k01xp8kxo
             http://localhost:7080/igbo
+          runs: 3
           configPath: './lighthouse/lighthouserc.json'
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
