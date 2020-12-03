@@ -9,10 +9,11 @@ import {
   oneOfType,
   object,
 } from 'prop-types';
-import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 const Card = styled.div`
   width: 100%;
+  margin-right: 16px;
+  background-color: #fff;
   flex-shrink: 0;
   scroll-snap-align: center;
 `;
