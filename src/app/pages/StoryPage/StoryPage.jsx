@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { node } from 'prop-types';
 import styled from '@emotion/styled';
 import {
@@ -49,13 +49,133 @@ import AdContainer from '#containers/Ad';
 import CanonicalAdBootstrapJs from '#containers/Ad/Canonical/CanonicalAdBootstrapJs';
 import { RequestContext } from '#contexts/RequestContext';
 import useToggle from '#hooks/useToggle';
+import fetchPageData from '../../routes/cpsAsset/getInitialData';
 
 const MpuContainer = styled(AdContainer)`
   margin-bottom: ${GEL_SPACING_TRPL};
 `;
 
+const StyledTimestamp = styled(Timestamp)`
+  @media (max-width: ${GEL_GROUP_3_SCREEN_WIDTH_MAX}) {
+    padding-bottom: ${GEL_SPACING_DBL};
+  }
+
+  @media (min-width: ${GEL_GROUP_4_SCREEN_WIDTH_MIN}) {
+    padding-bottom: ${GEL_SPACING_TRPL};
+  }
+`;
+
+const gridColsMain = {
+  group0: 8,
+  group1: 8,
+  group2: 8,
+  group3: 8,
+  group4: 8,
+  group5: 8,
+};
+
+const CardTrack = styled.div`
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+`;
+
+const CardTrackWrapper = styled.div`
+  overflow-x: hidden;
+`;
+
+const FullStorySection = styled.div`
+  display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+const InfiniteStory = ({ pageData }) => {
+  const [showFullStory, setShowFullStory] = useState(false);
+
+  const metadata = path(['metadata'], pageData);
+  const blocks = pathOr([], ['content', 'model', 'blocks'], pageData);
+  const allowDateStamp = path(['options', 'allowDateStamp'], metadata);
+  const assetUri = path(['locators', 'assetUri'], metadata);
+  const { enabled: adsEnabled } = useToggle('ads');
+  const { showAdsBasedOnLocation } = useContext(RequestContext);
+
+  const isAdsEnabled = [
+    path(['metadata', 'options', 'allowAdvertising'], pageData),
+    adsEnabled,
+    showAdsBasedOnLocation,
+  ].every(Boolean);
+
+  const StyledByline = styled(Byline)`
+    @media (max-width: ${GEL_GROUP_3_SCREEN_WIDTH_MAX}) {
+      padding-bottom: ${GEL_SPACING_DBL};
+    }
+
+    @media (min-width: ${GEL_GROUP_4_SCREEN_WIDTH_MIN}) {
+      padding-bottom: ${GEL_SPACING_TRPL};
+    }
+  `;
+
+  const componentsToRender = {
+    fauxHeadline,
+    visuallyHiddenHeadline,
+    headline: headings,
+    subheadline: headings,
+    text,
+    image,
+    timestamp: props =>
+      allowDateStamp ? (
+        <StyledTimestamp {...props} popOut={false} minutesTolerance={1} />
+      ) : null,
+    video: props => <MediaPlayer {...props} assetUri={assetUri} />,
+    version: props => <MediaPlayer {...props} assetUri={assetUri} />,
+    byline: props => <StyledByline {...props} />,
+    include: props => <Include {...props} />,
+    social_embed: props => <SocialEmbed {...props} />,
+    mpu: props =>
+      isAdsEnabled ? <MpuContainer {...props} slotType="mpu" /> : null,
+    wsoj: props => (
+      <CpsRecommendations {...props} parentColumns={gridColsMain} items={[]} />
+    ),
+  };
+
+  const [headline, timestamp, ...bodyBlocks] = blocks;
+  const numberOfCards = 5;
+  const cardBlocks = bodyBlocks.slice(0, numberOfCards);
+
+  return (
+    <>
+      <Blocks
+        blocks={[headline, timestamp]}
+        componentsToRender={componentsToRender}
+      />
+      <>
+        <CardTrackWrapper>
+          <CardTrack>
+            <Blocks
+              blocks={cardBlocks}
+              componentsToRender={componentsToRender}
+              isCardFormat
+            />
+          </CardTrack>
+        </CardTrackWrapper>
+      </>
+      <>
+        <button type="button" onClick={() => setShowFullStory(!showFullStory)}>
+          Show Full Story
+        </button>
+        <FullStorySection show={showFullStory}>
+          <Blocks blocks={bodyBlocks} componentsToRender={componentsToRender} />
+        </FullStorySection>
+      </>
+    </>
+  );
+};
+
 const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
-  const [showFullStory, setShowFullStory] = useState(false)
+  const [showFullStory, setShowFullStory] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [infiniteStories, setInfiniteStories] = useState([]);
+
   const {
     dir,
     mostRead: { header },
@@ -63,6 +183,7 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
     service,
     serviceLang,
     lang,
+    variant,
   } = useContext(ServiceContext);
   const title = path(['promo', 'headlines', 'headline'], pageData);
   const shortHeadline = path(['promo', 'headlines', 'shortHeadline'], pageData);
@@ -96,6 +217,8 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   const featuresInitialData = path(['secondaryColumn', 'features'], pageData);
   const recommendationsInitialData = path(['recommendations'], pageData);
 
+  const [nextRelatedItem, setNextRelatedItem] = useState(0);
+
   const gridColumns = {
     group0: 8,
     group1: 8,
@@ -121,15 +244,6 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
     group3: 1,
     group4: 1,
     group5: 1,
-  };
-
-  const gridColsMain = {
-    group0: 8,
-    group1: 8,
-    group2: 8,
-    group3: 8,
-    group4: 8,
-    group5: 8,
   };
 
   const gridColsSecondary = {
@@ -185,16 +299,6 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
     ),
   };
 
-  const StyledTimestamp = styled(Timestamp)`
-    @media (max-width: ${GEL_GROUP_3_SCREEN_WIDTH_MAX}) {
-      padding-bottom: ${GEL_SPACING_DBL};
-    }
-
-    @media (min-width: ${GEL_GROUP_4_SCREEN_WIDTH_MIN}) {
-      padding-bottom: ${GEL_SPACING_TRPL};
-    }
-  `;
-
   const StyledByline = styled(Byline)`
     @media (max-width: ${GEL_GROUP_3_SCREEN_WIDTH_MAX}) {
       padding-bottom: ${GEL_SPACING_DBL};
@@ -245,10 +349,6 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
     }
   `;
 
-  const FullStorySection = styled.div`
-    display: ${props => props.show ? 'block' : 'none'}
-  `
-
   const MostReadWrapper = ({ children }) => (
     <section role="region" aria-labelledby="Most-Read" data-e2e="most-read">
       <SectionLabel
@@ -267,23 +367,49 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
     children: node.isRequired,
   };
 
-  console.log(blocks);
-
   const [headline, timestamp, ...bodyBlocks] = blocks;
   const numberOfCards = 5;
 
-  const cardBlocks = bodyBlocks.slice(0, 4);
+  const cardBlocks = bodyBlocks.slice(0, numberOfCards);
 
-  const CardTrack = styled.div`
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-  `;
+  const loaderRef = useRef();
 
-  const CardTrackWrapper = styled.div`
-    overflow-x: hidden;
-  `
+  const loadNextArticle = async () => {
+    const itemToLoad = relatedContent[nextRelatedItem];
+
+    if (isLoading) {
+      return;
+    }
+
+    setIsLoading(true);
+
+    const nextStoryData = await fetchPageData({
+      path: itemToLoad.locators.assetUri,
+      service,
+      variant,
+      pageType: itemToLoad.cpsType,
+      toggles: {},
+      forceLiveData: true,
+    });
+
+    setNextRelatedItem(prev => prev + 1);
+    setIsLoading(false);
+    setInfiniteStories(prev => [...prev, nextStoryData.pageData]);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          loadNextArticle();
+        }
+      });
+    });
+
+    if (loaderRef.current) {
+      observer.observe(loaderRef.current);
+    }
+  });
 
   return (
     <>
@@ -330,22 +456,39 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
           parentColumns={gridColumns}
         >
           <main role="main">
-            <Blocks blocks={[headline, timestamp]} componentsToRender={componentsToRender} />
+            <Blocks
+              blocks={[headline, timestamp]}
+              componentsToRender={componentsToRender}
+            />
             <>
               <CardTrackWrapper>
                 <CardTrack>
-                  <Blocks blocks={cardBlocks} componentsToRender={componentsToRender} isCardFormat={true} />
+                  <Blocks
+                    blocks={cardBlocks}
+                    componentsToRender={componentsToRender}
+                    isCardFormat
+                  />
                 </CardTrack>
               </CardTrackWrapper>
-              
             </>
             <>
-              <button onClick={() => setShowFullStory(!showFullStory)}>Show Full Story</button>
+              <button
+                type="button"
+                onClick={() => setShowFullStory(!showFullStory)}
+              >
+                Show Full Story
+              </button>
               <FullStorySection show={showFullStory}>
-                <Blocks blocks={bodyBlocks} componentsToRender={componentsToRender} />
+                <Blocks
+                  blocks={bodyBlocks}
+                  componentsToRender={componentsToRender}
+                />
               </FullStorySection>
             </>
-            
+            {infiniteStories.map(storyData => (
+              <InfiniteStory pageData={storyData} />
+            ))}
+            <div ref={loaderRef}>{isLoading ? 'Loading...' : 'Load More'}</div>
           </main>
           {/* <CpsRelatedContent
             content={relatedContent}
