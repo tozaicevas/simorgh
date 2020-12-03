@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import styled from '@emotion/styled';
 import {
   objectOf,
   arrayOf,
@@ -9,7 +10,13 @@ import {
   object,
 } from 'prop-types';
 
-const Blocks = ({ blocks, componentsToRender }) =>
+const Card = styled.div`
+  width: 100%;
+  flex-shrink: 0;
+  scroll-snap-align: center;
+`;
+
+const Blocks = ({ blocks, componentsToRender, isCardFormat }) =>
   blocks.map((block, index) => {
     const { type, model, id, position } = block;
 
@@ -23,15 +30,18 @@ const Blocks = ({ blocks, componentsToRender }) =>
       return null;
     }
 
+    const WrappingComponent = isCardFormat ? Card : Fragment;
+
     const { type: typeOfPreviousBlock } = blocks[index - 1] || {};
     return (
-      <Block
-        key={id}
-        position={position}
-        type={type}
-        typeOfPreviousBlock={typeOfPreviousBlock}
-        {...model}
-      />
+      <WrappingComponent key={isCardFormat ? `card-${id}` : id}>
+        <Block
+          position={position}
+          type={type}
+          typeOfPreviousBlock={typeOfPreviousBlock}
+          {...model}
+        />
+      </WrappingComponent>
     );
   });
 

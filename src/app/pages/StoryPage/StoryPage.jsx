@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { node } from 'prop-types';
 import styled from '@emotion/styled';
 import {
@@ -55,6 +55,7 @@ const MpuContainer = styled(AdContainer)`
 `;
 
 const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
+  const [showFullStory, setShowFullStory] = useState(false)
   const {
     dir,
     mostRead: { header },
@@ -244,6 +245,10 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
     }
   `;
 
+  const FullStorySection = styled.div`
+    display: ${props => props.show ? 'block' : 'none'}
+  `
+
   const MostReadWrapper = ({ children }) => (
     <section role="region" aria-labelledby="Most-Read" data-e2e="most-read">
       <SectionLabel
@@ -261,6 +266,24 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   MostReadWrapper.propTypes = {
     children: node.isRequired,
   };
+
+  console.log(blocks);
+
+  const [headline, timestamp, ...bodyBlocks] = blocks;
+  const numberOfCards = 5;
+
+  const cardBlocks = bodyBlocks.slice(0, 4);
+
+  const CardTrack = styled.div`
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+  `;
+
+  const CardTrackWrapper = styled.div`
+    overflow-x: hidden;
+  `
 
   return (
     <>
@@ -307,14 +330,29 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
           parentColumns={gridColumns}
         >
           <main role="main">
-            <Blocks blocks={blocks} componentsToRender={componentsToRender} />
+            <Blocks blocks={[headline, timestamp]} componentsToRender={componentsToRender} />
+            <>
+              <CardTrackWrapper>
+                <CardTrack>
+                  <Blocks blocks={cardBlocks} componentsToRender={componentsToRender} isCardFormat={true} />
+                </CardTrack>
+              </CardTrackWrapper>
+              
+            </>
+            <>
+              <button onClick={() => setShowFullStory(!showFullStory)}>Show Full Story</button>
+              <FullStorySection show={showFullStory}>
+                <Blocks blocks={bodyBlocks} componentsToRender={componentsToRender} />
+              </FullStorySection>
+            </>
+            
           </main>
-          <CpsRelatedContent
+          {/* <CpsRelatedContent
             content={relatedContent}
             parentColumns={gridColsMain}
-          />
+          /> */}
         </GridPrimaryColumn>
-        <GridSecondaryColumn
+        {/* <GridSecondaryColumn
           item
           columns={gridColsSecondary}
           parentColumns={gridColumns}
@@ -347,7 +385,7 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
               initialData={mostReadInitialData}
             />
           </ComponentWrapper>
-        </GridSecondaryColumn>
+        </GridSecondaryColumn> */}
       </StoryPageGrid>
     </>
   );
