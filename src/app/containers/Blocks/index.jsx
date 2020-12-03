@@ -17,7 +17,7 @@ const Card = styled.div`
   scroll-snap-align: center;
 `;
 
-const Blocks = ({ blocks, componentsToRender, isCardFormat }) =>
+const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, showFullStory }) =>
   blocks.map((block, index) => {
     const { type, model, id, position } = block;
 
@@ -34,6 +34,13 @@ const Blocks = ({ blocks, componentsToRender, isCardFormat }) =>
     const WrappingComponent = isCardFormat ? Card : Fragment;
 
     const { type: typeOfPreviousBlock } = blocks[index - 1] || {};
+
+    const scrollToId = (setShowFullStory, showFullStory, id) => {
+      setShowFullStory(true);
+
+      setTimeout(() => document.getElementById(id).scrollIntoView(), showFullStory ? 0 : 200)
+    }
+
     return (
       <WrappingComponent key={isCardFormat ? `card-${id}` : id}>
         <div id={isCardFormat ? '' : id}>
@@ -43,7 +50,7 @@ const Blocks = ({ blocks, componentsToRender, isCardFormat }) =>
             typeOfPreviousBlock={typeOfPreviousBlock}
             {...model}
           />
-          {isCardFormat && <AnchorLink href={`#${id}`}>See More</AnchorLink>}
+          {isCardFormat && <button onClick={() => scrollToId(setShowFullStory, showFullStory, id)}>See More</button>}
         </div>
         
       </WrappingComponent>

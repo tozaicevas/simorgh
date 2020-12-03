@@ -332,7 +332,7 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
             <>
               <CardTrackWrapper>
                 <CardTrack>
-                  <Blocks blocks={cardBlocks} componentsToRender={componentsToRender} isCardFormat={true} />
+                  <Blocks blocks={cardBlocks} componentsToRender={componentsToRender} isCardFormat={true} setShowFullStory={setShowFullStory} showFullStory={showFullStory} />
                 </CardTrack>
               </CardTrackWrapper>
               
