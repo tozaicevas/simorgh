@@ -25,7 +25,7 @@ const logger = nodeLogger(__filename);
  * Timeout values here: https://github.com/bbc/simorgh/blob/latest/src/app/lib/utilities/getFetchTimeouts/index.js
  * @param {...string} loggerArgs Additional arguments for richer logging.
  */
-const fetchPageData = async ({ path, timeout, ...loggerArgs }) => {
+const fetchPageData = async ({ path, timeout, forceLiveData, ...loggerArgs }) => {
   const url = path.startsWith('http') ? path : getUrl(path);
   const effectiveTimeout = timeout || PRIMARY_DATA_TIMEOUT;
 
@@ -35,8 +35,10 @@ const fetchPageData = async ({ path, timeout, ...loggerArgs }) => {
     ...loggerArgs,
   });
 
+  console.log(forceLiveData);
+
   try {
-    const response = await fetch(url, { timeout: effectiveTimeout });
+    const response = await fetch(forceLiveData ? `https://www.bbc.com${path}.json` : url, { timeout: effectiveTimeout });
     const { status } = response;
 
     if (status === OK) {

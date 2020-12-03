@@ -69,12 +69,13 @@ export default async ({
   variant,
   pageType,
   toggles,
+  forceLiveData,
 }) => {
   try {
     const env = pathname.includes('renderer_env=live')
       ? 'live'
       : process.env.SIMORGH_APP_ENV;
-    const { json, status } = await fetchPageData({ path: pathname, pageType });
+    const { json, status } = await fetchPageData({ path: pathname, pageType, forceLiveData });
 
     const additionalPageData = await getAdditionalPageData({
       pageData: json,

@@ -19,6 +19,10 @@ const Card = styled.div`
 
 const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, showFullStory }) =>
   blocks.map((block, index) => {
+    if (!block) {
+      return null;
+    }
+
     const { type, model, id, position } = block;
 
     if (!componentsToRender || !type) {
