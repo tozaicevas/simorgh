@@ -1,4 +1,5 @@
 import path from 'ramda/src/path';
+import pathOr from 'ramda/src/pathOr';
 import fetchPageData from '../../utils/fetchPageData';
 import overrideRendererOnTest from '../../utils/overrideRendererOnTest';
 import getPlaceholderImageUrlUtil from '../../utils/getPlaceholderImageUrl';
@@ -11,24 +12,32 @@ import getEpisodeAvailability, {
 } from '#lib/utilities/episodeAvailability';
 import getErrorStatusCode from '../../utils/fetchPageData/utils/getErrorStatusCode';
 import withRadioSchedule from '#app/routes/utils/withRadioSchedule';
-import _hasRadioSchedule from '../../utils/hasRadioSchedule';
 import getRadioService from '../../utils/getRadioService';
+import processRecentEpisodes from '../../utils/processRecentEpisodes';
+
+const DEFAULT_TOGGLE_VALUE = { enabled: false, value: 4 };
 
 const getRadioScheduleData = path(['radioScheduleData']);
+const getScheduleToggle = path(['onDemandRadioSchedule', 'enabled']);
+const getRecentEpisodesToggle = pathOr(DEFAULT_TOGGLE_VALUE, [
+  'recentAudioEpisodes',
+]);
 
-export default async ({ path: pathname, pageType, service }) => {
+export default async ({ path: pathname, pageType, service, toggles }) => {
   try {
     const onDemandRadioDataPath = overrideRendererOnTest(pathname);
-    const hasRadioSchedule = await _hasRadioSchedule({
-      pageType: 'onDemandRadio',
-      service,
-    });
     const pageDataPromise = await fetchPageData({
       path: onDemandRadioDataPath,
       pageType,
     });
+    const scheduleIsEnabled = getScheduleToggle(toggles);
+    const recentEpisodesToggle = getRecentEpisodesToggle(toggles);
+    const {
+      enabled: showRecentEpisodes,
+      value: recentEpisodesLimit,
+    } = recentEpisodesToggle;
 
-    const { json, status } = hasRadioSchedule
+    const { json, status } = scheduleIsEnabled
       ? await withRadioSchedule({
           pageDataPromise,
           service,
@@ -45,6 +54,14 @@ export default async ({ path: pathname, pageType, service }) => {
     );
     const get = (fieldPath, logLevel) =>
       logLevel ? withLogging(fieldPath, logLevel) : path(fieldPath, json);
+
+    const episodeId = get(['content', 'blocks', 0, 'id'], LOG_LEVELS.ERROR);
+    const recentEpisodes = showRecentEpisodes
+      ? processRecentEpisodes(json, {
+          exclude: episodeId,
+          recentEpisodesLimit,
+        })
+      : [];
 
     return {
       status,
@@ -64,7 +81,7 @@ export default async ({ path: pathname, pageType, service }) => {
           ['metadata', 'analyticsLabels', 'contentType'],
           LOG_LEVELS.INFO,
         ),
-        episodeId: get(['content', 'blocks', 0, 'id'], LOG_LEVELS.ERROR),
+        episodeId,
         masterBrand: get(['metadata', 'createdBy'], LOG_LEVELS.ERROR),
         releaseDateTimeStamp: get(
           ['metadata', 'releaseDateTimeStamp'],
@@ -83,6 +100,7 @@ export default async ({ path: pathname, pageType, service }) => {
         ),
         episodeAvailability: getEpisodeAvailability(json),
         radioScheduleData: getRadioScheduleData(json),
+        recentEpisodes,
       },
     };
   } catch ({ message, status = getErrorStatusCode() }) {

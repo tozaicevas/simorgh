@@ -36,6 +36,7 @@ export const service = {
     datetimeLocale: 'am',
     service: 'amharic',
     serviceName: 'Amharic',
+    languageName: 'Amharic',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcnews',
     twitterSite: '@bbcnews',
@@ -154,6 +155,7 @@ export const service = {
         previousRadioShow: 'ያለፈ የሬዲዮ ስርጭት',
         nextRadioShow: 'ቀጣይ የሬዲዮ ስርጭት',
         duration: 'ርዝመት',
+        recentEpisodes: 'ያለፉ ዝግጅቶች’',
       },
       socialEmbed: {
         caption: {
@@ -193,9 +195,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onLiveRadioPage: true,
-      onOnDemandRadioPage: true,
-      onFrontPage: false,
       header: 'ያድምጡ',
       durationLabel: 'ርዝመት %duration%',
     },
@@ -229,7 +228,7 @@ export const service = {
           text: 'ኩኪዎች',
         },
         {
-          href: 'https://www.bbc.com/amharic/institutional-42228117',
+          href: 'https://www.bbc.co.uk/send/u50853181',
           text: 'ቢቢሲን ያግኙ',
         },
         {

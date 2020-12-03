@@ -21,6 +21,7 @@ const baseServiceConfig = {
   datetimeLocale: `zh-cn`,
   service: 'ukchina',
   serviceName: 'UK China',
+  languageName: 'Chinese',
   themeColor: `${C_POSTBOX}`,
   twitterCreator: '@BBCChina',
   twitterSite: '@BBCChina',
@@ -78,7 +79,7 @@ export const service = {
           text: 'Cookies',
         },
         {
-          href: 'https://www.bbc.com/ukchina/simp/institutional-38733406',
+          href: 'https://www.bbc.co.uk/send/u50853863',
           text: '联络BBC',
         },
         {
@@ -111,10 +112,6 @@ export const service = {
       {
         title: '主页',
         url: '/ukchina/simp',
-      },
-      {
-        title: 'BBC精选',
-        url: '/ukchina/simp/horizon',
       },
       {
         title: '视频内容',
@@ -228,6 +225,7 @@ export const service = {
         previousRadioShow: '上期广播节目',
         nextRadioShow: '下期广播节目',
         duration: '节目全长',
+        recentEpisodes: '存档节目',
       },
       socialEmbed: {
         caption: {
@@ -324,10 +322,6 @@ export const service = {
       {
         title: '主頁',
         url: '/ukchina/trad',
-      },
-      {
-        title: 'BBC精選',
-        url: '/ukchina/trad/horizon',
       },
       {
         title: '視頻內容',
@@ -441,6 +435,7 @@ export const service = {
         previousRadioShow: '上期廣播節目',
         nextRadioShow: '下期廣播節目',
         duration: '節目全長',
+        recentEpisodes: '存档节目',
       },
       socialEmbed: {
         caption: {

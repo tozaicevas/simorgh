@@ -14,19 +14,19 @@ import withMediaError from '#lib/utilities/episodeAvailability/withMediaError';
 
 const OnDemandTvPage = withMediaError(_OnDemandTvPage);
 
-const Page = ({
-  pageData,
-  service,
-  isAmp = false,
-  darkModeEnabled = false,
-}) => (
+const toggles = {
+  recentVideoEpisodes: {
+    enabled: false,
+    value: 4,
+  },
+};
+
+const Page = ({ pageData, service, isAmp = false }) => (
   <StaticRouter>
-    <ToggleContextProvider
-      toggles={{ cinemaModeTV: { enabled: darkModeEnabled } }}
-    >
+    <ToggleContextProvider>
       <ServiceContextProvider service={service}>
         <RequestContextProvider
-          bbcOrigin="https://www.test.bbc.co.uk"
+          bbcOrigin="https://www.test.bbc.com"
           isAmp={isAmp}
           pageType="media"
           pathname="/pathname"
@@ -40,21 +40,11 @@ const Page = ({
   </StaticRouter>
 );
 
-const renderPage = async ({
-  pageData,
-  service,
-  isAmp = false,
-  darkModeEnabled = false,
-}) => {
+const renderPage = async ({ pageData, service, isAmp = false }) => {
   let result;
   await act(async () => {
     result = await render(
-      <Page
-        pageData={pageData}
-        service={service}
-        isAmp={isAmp}
-        darkModeEnabled={darkModeEnabled}
-      />,
+      <Page pageData={pageData} service={service} isAmp={isAmp} />,
     );
   });
 
@@ -83,6 +73,7 @@ describe('OnDemand TV Brand Page ', () => {
     const { pageData } = await getInitialData({
       path: 'some-ondemand-tv-path',
       pageType,
+      toggles,
     });
     await renderPage({
       pageData,
@@ -90,7 +81,7 @@ describe('OnDemand TV Brand Page ', () => {
     });
 
     const visuallyHiddenHeadline = document.querySelector(
-      'h1[class^="VisuallyHiddenText"]',
+      'h1[class*="VisuallyHiddenText"]',
     );
 
     expect(visuallyHiddenHeadline).toBeInTheDocument();
@@ -103,6 +94,7 @@ describe('OnDemand TV Brand Page ', () => {
     const { pageData } = await getInitialData({
       path: 'some-ondemand-tv-path',
       pageType,
+      toggles,
     });
     const { getByText } = await renderPage({
       pageData,
@@ -118,6 +110,7 @@ describe('OnDemand TV Brand Page ', () => {
     const { pageData } = await getInitialData({
       path: 'some-ondemand-tv-path',
       pageType,
+      toggles,
     });
     const { container } = await renderPage({
       pageData,
@@ -136,6 +129,7 @@ describe('OnDemand TV Brand Page ', () => {
     const { pageData } = await getInitialData({
       path: 'some-ondemand-tv-path',
       pageType,
+      toggles,
     });
     const { container } = await renderPage({
       pageData,
@@ -151,11 +145,11 @@ describe('OnDemand TV Brand Page ', () => {
     const { pageData } = await getInitialData({
       path: 'some-ondemand-tv-path',
       pageType,
+      toggles,
     });
     const { container } = await renderPage({
       pageData,
       service: 'pashto',
-      darkModeEnabled: true,
     });
 
     expect(container).toMatchSnapshot();
@@ -168,6 +162,7 @@ it('should show the datestamp correctly for Pashto OnDemand TV Pages', async () 
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { getByText } = await renderPage({
     pageData,
@@ -183,6 +178,7 @@ it('should show the summary for OnDemand TV Pages', async () => {
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { getByText } = await renderPage({
     pageData,
@@ -202,6 +198,7 @@ it('should show the video player on canonical with no live override', async () =
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { container } = await renderPage({
     pageData,
@@ -212,7 +209,7 @@ it('should show the video player on canonical with no live override', async () =
     .getAttribute('src');
 
   expect(videoPlayerIframeSrc).toEqual(
-    'https://polling.bbc.co.uk/ws/av-embeds/media/pashto/bbc_pashto_tv/w172xcldhhrdqgb/ps',
+    'https://bbc.com/ws/av-embeds/media/pashto/bbc_pashto_tv/w172xcldhhrdqgb/ps',
   );
 });
 
@@ -222,6 +219,7 @@ it('should show the video player on amp with no live override', async () => {
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { container } = await renderPage({
     pageData,
@@ -243,6 +241,7 @@ it('should show the video player on canonical with live override', async () => {
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { container } = await renderPage({
     pageData,
@@ -253,7 +252,7 @@ it('should show the video player on canonical with live override', async () => {
     .getAttribute('src');
 
   expect(videoPlayerIframeSrc).toEqual(
-    'https://polling.test.bbc.co.uk/ws/av-embeds/media/pashto/bbc_pashto_tv/w172xcldhhrdqgb/ps?morph_env=live',
+    'https://test.bbc.com/ws/av-embeds/media/pashto/bbc_pashto_tv/w172xcldhhrdqgb/ps?morph_env=live',
   );
 });
 
@@ -262,6 +261,7 @@ it('should show the video player on amp with live override', async () => {
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { container } = await renderPage({
     pageData,
@@ -287,6 +287,7 @@ it('should show the expired content message if episode is expired', async () => 
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { container, getByText } = await renderPage({
     pageData,
@@ -310,6 +311,7 @@ it('should show the future content message if episode is not yet available', asy
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { container, getByText } = await renderPage({
     pageData,
@@ -333,6 +335,7 @@ it('should show the future content message if episode is pending', async () => {
   const { pageData } = await getInitialData({
     path: 'some-ondemand-tv-path',
     pageType,
+    toggles,
   });
   const { container, getByText } = await renderPage({
     pageData,

@@ -33,6 +33,7 @@ export const service = {
     datetimeLocale: `ja`,
     service: 'japanese',
     serviceName: 'Japan',
+    languageName: 'Japanese',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcnewsjapan',
     twitterSite: '@bbcnewsjapan',
@@ -154,6 +155,7 @@ export const service = {
         previousRadioShow: '前のラジオ番組',
         nextRadioShow: '次のラジオ番組',
         duration: '所要時間',
+        recentEpisodes: 'さらに',
       },
       socialEmbed: {
         caption: {
@@ -248,32 +250,32 @@ export const service = {
         url: '/japanese/52137815',
       },
       {
+        title: '米大統領選',
+        url: '/japanese/53969845',
+      },
+      {
         title: '日本',
-        url:
-          'https://www.bbc.com/japanese/topics/3f53c272-5b8f-4a4f-99de-a857d6726c5b',
+        url: '/japanese/topics/cyx5k201n3qt',
       },
       {
         title: 'アジア',
-        url:
-          'https://www.bbc.com/japanese/topics/ba90754a-9033-4e9c-990b-d1139e5070a3',
+        url: '/japanese/topics/cyx5k20kvd2t',
       },
       {
         title: 'イギリス',
-        url:
-          'https://www.bbc.com/japanese/topics/2e91364c-5c77-4660-b76e-d76202785e64',
+        url: '/japanese/topics/c95y3gk44nyt',
       },
       {
         title: 'アメリカ',
-        url:
-          'https://www.bbc.com/japanese/topics/82857f8e-8134-462a-bb32-b7b14f4eab75',
+        url: '/japanese/topics/cdr56kqdr70t',
       },
       {
         title: '解説・読み物',
-        url: 'https://www.bbc.com/japanese/features_and_analysis',
+        url: '/japanese/features-and-analysis-54539120',
       },
       {
         title: 'ビデオ',
-        url: 'https://www.bbc.com/japanese/video',
+        url: '/japanese/video-55128146',
       },
       {
         title: 'ワールドニュースTV',

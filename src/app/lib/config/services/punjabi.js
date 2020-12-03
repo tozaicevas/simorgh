@@ -32,6 +32,7 @@ export const service = {
     datetimeLocale: `pa-in`,
     service: 'punjabi',
     serviceName: 'Punjabi',
+    languageName: 'Punjabi',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcnewspunjabi',
     twitterSite: '@bbcnewspunjabi',
@@ -153,6 +154,7 @@ export const service = {
         previousRadioShow: 'Previous radio show',
         nextRadioShow: 'Next radio show',
         duration: 'Duration',
+        recentEpisodes: 'ਤਾਜ਼ਾ ਐਪੀਸੋਡ',
       },
       socialEmbed: {
         caption: {
@@ -249,7 +251,7 @@ export const service = {
           text: 'ਕੁਕੀਜ਼',
         },
         {
-          href: 'https://www.bbc.com/punjabi/institutional-42227903',
+          href: 'https://www.bbc.co.uk/send/u50853621',
           text: 'ਬੀਬੀਸੀ ਨਾਲ ਸੰਪਰਕ ਕਰੋ',
         },
         {

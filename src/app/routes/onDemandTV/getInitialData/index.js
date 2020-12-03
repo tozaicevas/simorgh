@@ -1,3 +1,4 @@
+import pathOr from 'ramda/src/pathOr';
 import fetchPageData from '../../utils/fetchPageData';
 import overrideRendererOnTest from '../../utils/overrideRendererOnTest';
 import getPlaceholderImageUrl from '../../utils/getPlaceholderImageUrl';
@@ -10,19 +11,43 @@ import getEpisodeAvailability, {
   getUrl,
 } from '#lib/utilities/episodeAvailability';
 
-export default async ({ path: pathname, pageType }) => {
+import processRecentEpisodes from '#app/routes/utils/processRecentEpisodes';
+
+const DEFAULT_TOGGLE_VALUE = { enabled: false, value: 4 };
+
+const getRecentEpisodesToggle = pathOr(DEFAULT_TOGGLE_VALUE, [
+  'recentVideoEpisodes',
+]);
+
+export default async ({ path: pathname, pageType, toggles }) => {
   try {
     const onDemandTvDataPath = overrideRendererOnTest(pathname);
     const { json, status } = await fetchPageData({
       path: onDemandTvDataPath,
       pageType,
     });
+    const recentEpisodesToggle = getRecentEpisodesToggle(toggles);
+    const {
+      enabled: showRecentEpisodes,
+      value: recentEpisodesLimit,
+    } = recentEpisodesToggle;
 
     const get = pathWithLogging(getUrl(json), TV_MISSING_FIELD, json);
+
+    const episodeId = get(['content', 'blocks', 0, 'id'], LOG_LEVELS.ERROR);
+    const recentEpisodes = showRecentEpisodes
+      ? processRecentEpisodes(json, {
+          exclude: episodeId,
+          recentEpisodesLimit,
+          urlFormatter: (service, id) =>
+            `/${service}/${id.split(':').pop().replace('/', '/tv/')}`,
+        })
+      : [];
 
     return {
       status,
       pageData: {
+        darkMode: true,
         metadata: { type: 'On Demand TV' },
         language: get(['metadata', 'language']),
         brandTitle: get(['metadata', 'title']),
@@ -48,9 +73,10 @@ export default async ({ path: pathname, pageType }) => {
         ),
         promoBrandTitle: get(['promo', 'brand', 'title']),
         masterBrand: get(['metadata', 'createdBy'], LOG_LEVELS.ERROR),
-        episodeId: get(['content', 'blocks', 0, 'id'], LOG_LEVELS.ERROR),
+        episodeId,
         imageUrl: get(['content', 'blocks', 0, 'imageUrl']),
         episodeAvailability: getEpisodeAvailability(json),
+        recentEpisodes,
       },
     };
   } catch ({ message, status = getErrorStatusCode() }) {

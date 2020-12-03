@@ -32,6 +32,7 @@ export const service = {
     datetimeLocale: `hi`,
     service: 'hindi',
     serviceName: 'Hindi',
+    languageName: 'Hindi',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbchindi',
     twitterSite: '@bbchindi',
@@ -169,6 +170,7 @@ export const service = {
         previousRadioShow: 'पिछला रेडियो शो',
         nextRadioShow: 'अगला रेडियो शो',
         duration: 'अवधि',
+        recentEpisodes: 'प्रसारण का समय',
       },
       socialEmbed: {
         caption: {
@@ -245,7 +247,7 @@ export const service = {
           text: 'कुकीज़',
         },
         {
-          href: 'https://www.bbc.com/hindi/institutional-37342616',
+          href: 'https://www.bbc.co.uk/send/u50853357',
           text: 'बीबीसी से संपर्क करें',
         },
         {
@@ -271,35 +273,31 @@ export const service = {
       },
       {
         title: 'भारत',
-        url: '/hindi/india',
+        url: '/hindi/topics/ckdxnkz7607t',
       },
       {
         title: 'विदेश',
-        url: '/hindi/international',
+        url: '/hindi/topics/c9wpm0en87xt',
       },
       {
         title: 'मनोरंजन',
-        url: '/hindi/entertainment',
+        url: '/hindi/topics/c06gq3n0pp7t',
       },
       {
         title: 'खेल',
-        url: '/hindi/sport',
+        url: '/hindi/topics/cwr9j8g1kj9t',
       },
       {
         title: 'विज्ञान-टेक्नॉलॉजी',
-        url: '/hindi/science',
+        url: '/hindi/topics/c2lej0594knt',
       },
       {
         title: 'सोशल',
-        url: '/hindi/social',
+        url: '/hindi/topics/c2e4q0z9qznt',
       },
       {
         title: 'वीडियो',
         url: '/hindi/media/video',
-      },
-      {
-        title: 'बीबीसी स्पेशल',
-        url: '/hindi/in_depth',
       },
     ],
   },

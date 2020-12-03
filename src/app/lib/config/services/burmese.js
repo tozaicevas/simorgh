@@ -33,6 +33,7 @@ export const service = {
     datetimeLocale: `my`,
     service: 'burmese',
     serviceName: 'Burmese',
+    languageName: 'Burmese',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcburmese',
     twitterSite: '@bbcburmese',
@@ -169,6 +170,7 @@ export const service = {
         previousRadioShow: 'ယခင် ရေဒီယိုအစီအစဉ်',
         nextRadioShow: 'နောက် ရေဒီယိုအစီအစဉ်',
         duration: 'ကြာမြင့်ချိန်',
+        recentEpisodes: 'ထုတ်လွှင့်ပြီး အစီအစဉ်မျာ',
       },
       socialEmbed: {
         caption: {
@@ -210,9 +212,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onLiveRadioPage: true,
-      onOnDemandRadioPage: true,
-      onFrontPage: false,
       header: 'နောက်ဆုံးလွှင့် အစီအစဉ်များ',
       durationLabel: 'ကြာမြင့်ချိန် %duration%',
     },
@@ -243,7 +242,7 @@ export const service = {
           text: 'ကွတ်ကီး',
         },
         {
-          href: 'https://www.bbc.com/burmese/institutional-37577525',
+          href: 'https://www.bbc.co.uk/send/u50853269',
           text: 'ဘီဘီစီကို ဆက်သွယ်ရန်',
         },
         {
@@ -265,23 +264,23 @@ export const service = {
       },
       {
         title: 'မြန်မာ့ရေးရာ',
-        url: '/burmese/burma',
+        url: '/burmese/topics/c404v08p1wxt',
       },
       {
         title: 'နိုင်ငံတကာ',
-        url: '/burmese/world',
+        url: '/burmese/topics/cnlv9j1z93wt',
       },
       {
         title: 'ဆောင်းပါး',
-        url: '/burmese/in_depth',
+        url: '/burmese/in-depth-54539126',
       },
       {
         title: 'အားကစား',
-        url: '/burmese/sport',
+        url: '/burmese/topics/cxnykndgd87t',
       },
       {
         title: 'ကုန်သွယ်စီးပွား',
-        url: '/burmese/economy',
+        url: '/burmese/topics/c9wpm0en9jdt',
       },
       {
         title: 'ဗီဒီယိုများ',

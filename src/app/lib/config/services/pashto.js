@@ -2,8 +2,8 @@ import { C_POSTBOX, C_WHITE } from '@bbc/psammead-styles/colours';
 import { arabic } from '@bbc/gel-foundations/scripts';
 import { pashto as brandSVG } from '@bbc/psammead-assets/svgs';
 import {
-  F_NASSIM_PASHTO_REGULAR,
-  F_NASSIM_PASHTO_BOLD,
+  F_REITH_QALAM_REGULAR,
+  F_REITH_QALAM_BOLD,
 } from '@bbc/psammead-styles/fonts';
 import '@bbc/psammead-locales/moment/ps';
 import '@bbc/moment-timezone-include/tz/GMT';
@@ -37,6 +37,7 @@ export const service = {
     datetimeLocale: 'ps',
     service: 'pashto',
     serviceName: 'Pashto',
+    languageName: 'Pashto',
     altCalendar: jalaali,
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcpashto',
@@ -152,6 +153,7 @@ export const service = {
         audio: 'غږ',
         photogallery: 'دعکسونو ګالري',
         video: 'ویډیو',
+        recentEpisodes: 'پخواني پروګرامونه',
         bbc_pashto_radio: {
           title: 'بي بي سي افغانستان (پښتو خپرونه)',
           subtitle:
@@ -209,10 +211,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onLiveRadioPage: true,
-      onOnDemandRadioPage: true,
-      onFrontPage: true,
-      frontPagePosition: 'Interactivity',
       frequenciesPageUrl: '/pashto/institutional/2012/03/000001_frequencies',
       frequenciesPageLabel: 'راديويي څپې',
       header: 'تازه خبرونه واورئ',
@@ -248,7 +246,7 @@ export const service = {
           text: 'Cookies',
         },
         {
-          href: 'https://www.bbc.co.uk/pashto/institutional-37622768',
+          href: 'https://www.bbc.co.uk/send/u50853533',
           text: 'زموږ سره اړیکي',
         },
         {
@@ -260,7 +258,7 @@ export const service = {
       ],
       copyrightText: 'بي بي سي. بي بي‌ سي‌ د نورو ویبپاڼو د محتوا مسوله نه ده.',
     },
-    fonts: [F_NASSIM_PASHTO_REGULAR, F_NASSIM_PASHTO_BOLD],
+    fonts: [F_REITH_QALAM_REGULAR, F_REITH_QALAM_BOLD],
     timezone: 'GMT',
     navigation: [
       {
@@ -269,23 +267,23 @@ export const service = {
       },
       {
         title: 'افغانستان',
-        url: '/pashto/afghanistan',
+        url: '/pashto/topics/cr50y57xj52t',
       },
       {
         title: 'پښتونخوا',
-        url: '/pashto/pakhtunkhwa',
+        url: '/pashto/topics/cz74k7wy49jt',
       },
       {
         title: 'نړۍ',
-        url: '/pashto/world',
+        url: '/pashto/topics/cxe2wdp2dv3t',
       },
       {
         title: 'ښځې',
-        url: '/pashto/topics/e45cb5f8-3c87-4ebd-ac1c-058e9be22862',
+        url: '/pashto/topics/cr50y5rq23gt',
       },
       {
         title: 'لوبې',
-        url: '/pashto/sport',
+        url: '/pashto/topics/cr50y59q860t',
       },
       {
         title: 'ويډيوګانې',
@@ -293,11 +291,11 @@ export const service = {
       },
       {
         title: 'ځانګړې پاڼې',
-        url: '/pashto/in_depth',
+        url: '/pashto/in-depth-54540873',
       },
       {
         title: 'کالم',
-        url: '/pashto/columns',
+        url: '/pashto/columns-54029178',
       },
     ],
   },

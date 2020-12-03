@@ -32,6 +32,7 @@ export const service = {
     datetimeLocale: `ky`,
     service: 'kyrgyz',
     serviceName: 'News Кыргыз КызMATы',
+    languageName: 'Kyrgyz',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbckyrgyz',
     twitterSite: '@bbckyrgyz',
@@ -166,6 +167,7 @@ export const service = {
         previousRadioShow: 'Previous radio show',
         nextRadioShow: 'Next radio show',
         duration: 'Duration',
+        recentEpisodes: 'Мурдагы берүүлөр',
       },
       socialEmbed: {
         caption: {
@@ -237,7 +239,7 @@ export const service = {
           text: 'Cookies',
         },
         {
-          href: 'https://www.bbc.com/kyrgyz/institutional-38157284',
+          href: 'https://www.bbc.co.uk/send/u50853445',
           text: 'Би-Би-Си менен байланышыңыз',
         },
         {
@@ -259,15 +261,11 @@ export const service = {
       },
       {
         title: 'Кыргызстан',
-        url: '/kyrgyz/kyrgyzstan',
+        url: '/kyrgyz/topics/cz74kjpyk07t',
       },
       {
         title: 'Дүйнө',
-        url: '/kyrgyz/world',
-      },
-      {
-        title: 'Сапар TV',
-        url: '/kyrgyz/sapartv',
+        url: '/kyrgyz/topics/ck2l9z012nkt',
       },
       {
         title: 'Видео',
@@ -275,15 +273,11 @@ export const service = {
       },
       {
         title: 'Маданият/Илим',
-        url: '/kyrgyz/entertainment',
+        url: '/kyrgyz/topics/czp8pjrkgp0t',
       },
       {
         title: 'Журнал',
-        url: '/kyrgyz/magazine',
-      },
-      {
-        title: 'Блог',
-        url: '/kyrgyz/blog',
+        url: '/kyrgyz/magazine-54071664',
       },
     ],
   },

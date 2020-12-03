@@ -32,6 +32,7 @@ export const service = {
     datetimeLocale: `rw`,
     service: 'gahuza',
     serviceName: 'Gahuza',
+    languageName: 'Kinyarwanda',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcgahuza',
     twitterSite: '@bbcgahuza',
@@ -161,6 +162,7 @@ export const service = {
         previousRadioShow: 'Ikiganiro ca radiyo giheruka',
         nextRadioShow: 'Ikiganiro ca radiyo gikurikira',
         duration: 'Umwanya bimara',
+        recentEpisodes: 'Ibiganiro byashise',
       },
       socialEmbed: {
         caption: {
@@ -200,7 +202,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onFrontPage: false,
       header: 'Ibiganiro bishya',
       durationLabel: 'Umwanya bimara %duration%',
     },
@@ -234,7 +235,7 @@ export const service = {
           text: 'Cookies',
         },
         {
-          href: 'https://www.bbc.com/gahuza/institutional-35754061',
+          href: 'https://www.bbc.co.uk/send/u50853291',
           text: 'Vugana na BBC',
         },
         {
@@ -254,12 +255,20 @@ export const service = {
         url: '/gahuza',
       },
       {
-        title: 'Amakuru',
-        url: '/gahuza/amakuru',
+        title: 'Ibiyaga binini',
+        url: '/gahuza/topics/c06gq67y3w5t',
+      },
+      {
+        title: 'Afrika',
+        url: '/gahuza/topics/crvnv566zx9t',
+      },
+      {
+        title: 'Mpuzamahanga',
+        url: '/gahuza/topics/c9dvd93jjkkt',
       },
       {
         title: 'Imikino',
-        url: '/gahuza/imikino',
+        url: '/gahuza/topics/c5qvpq0jzy7t',
       },
       {
         title: 'Video',

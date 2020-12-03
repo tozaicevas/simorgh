@@ -1,16 +1,8 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { shape, string, number, bool, func } from 'prop-types';
-import {
-  GEL_SPACING,
-  GEL_SPACING_DBL,
-  GEL_SPACING_TRPL,
-  GEL_SPACING_QUAD,
-} from '@bbc/gel-foundations/spacings';
-import {
-  GEL_GROUP_2_SCREEN_WIDTH_MIN,
-  GEL_GROUP_4_SCREEN_WIDTH_MIN,
-} from '@bbc/gel-foundations/breakpoints';
+import { GEL_SPACING_TRPL } from '@bbc/gel-foundations/spacings';
+import { GEL_GROUP_4_SCREEN_WIDTH_MIN } from '@bbc/gel-foundations/breakpoints';
 import { useLocation } from 'react-router-dom';
 import pathOr from 'ramda/src/pathOr';
 import MetadataContainer from '../../containers/Metadata';
@@ -28,8 +20,8 @@ import LinkedData from '#containers/LinkedData';
 import getMediaId from '#lib/utilities/getMediaId';
 import getMasterbrand from '#lib/utilities/getMasterbrand';
 import getEmbedUrl from '#lib/utilities/getEmbedUrl';
-import useToggle from '#hooks/useToggle';
 import RadioScheduleContainer from '#containers/RadioSchedule';
+import RecentAudioEpisodes from '#containers/RecentAudioEpisodes';
 
 const SKIP_LINK_ANCHOR_ID = 'content';
 
@@ -46,33 +38,9 @@ const getGroups = (zero, one, two, three, four, five) => ({
   group5: five,
 });
 
-const StyledGelPageGrid = styled(GelPageGrid)`
-  width: 100%;
-  flex-grow: 1; /* needed to ensure footer positions at bottom of viewport */
-`;
-
 const StyledGelWrapperGrid = styled(GelPageGrid)`
   @media (min-width: ${GEL_GROUP_4_SCREEN_WIDTH_MIN}) {
     padding-top: ${GEL_SPACING_TRPL};
-  }
-`;
-
-// iframe padding set to keep scrub bar and duration in view
-const StyledAudioPlayer = styled(AVPlayer)`
-  amp-iframe {
-    overflow: visible !important;
-    width: calc(100% + ${GEL_SPACING_DBL});
-    @media (min-width: ${GEL_GROUP_2_SCREEN_WIDTH_MIN}) {
-      width: calc(100% + ${GEL_SPACING_QUAD});
-    }
-  }
-  iframe {
-    width: calc(100% + ${GEL_SPACING_DBL});
-    margin: 0 -${GEL_SPACING};
-    @media (min-width: ${GEL_GROUP_2_SCREEN_WIDTH_MIN}) {
-      width: calc(100% + ${GEL_SPACING_QUAD});
-      margin: 0 -${GEL_SPACING_DBL};
-    }
   }
 `;
 
@@ -91,6 +59,8 @@ const OnDemandRadioPage = ({ pageData, mediaIsAvailable, MediaError }) => {
     promoBrandTitle,
     durationISO8601,
     thumbnailImageUrl,
+    radioScheduleData,
+    recentEpisodes,
   } = pageData;
 
   const { isAmp } = useContext(RequestContext);
@@ -120,12 +90,6 @@ const OnDemandRadioPage = ({ pageData, mediaIsAvailable, MediaError }) => {
     translations,
   );
 
-  const radioScheduleData = pathOr([], ['radioScheduleData'], pageData);
-  const hasRadioScheduleData = Boolean(radioScheduleData.length);
-  const { enabled: radioScheduleIsEnabled } = useToggle(
-    'onDemandRadioSchedule',
-  );
-
   return (
     <>
       <ATIAnalytics data={pageData} />
@@ -137,16 +101,15 @@ const OnDemandRadioPage = ({ pageData, mediaIsAvailable, MediaError }) => {
         description={shortSynopsis}
         openGraphType="website"
       />
-      <StyledGelPageGrid
-        forwardedAs="main"
+
+      <GelPageGrid
+        as="main"
         role="main"
-        dir={dir}
         columns={getGroups(6, 6, 6, 6, 8, 20)}
         enableGelGutters
       >
         <Grid
           item
-          dir={dir}
           startOffset={getGroups(1, 1, 1, 1, 2, 5)}
           columns={getGroups(6, 6, 6, 6, 6, 12)}
           margins={getGroups(true, true, true, true, false, false)}
@@ -156,7 +119,7 @@ const OnDemandRadioPage = ({ pageData, mediaIsAvailable, MediaError }) => {
             columns={getGroups(6, 6, 6, 6, 6, 6)}
             enableGelGutters
           >
-            <Grid dir={dir} item columns={getGroups(6, 6, 4, 4, 4, 4)}>
+            <Grid item columns={getGroups(6, 6, 4, 4, 4, 4)}>
               <StyledRadioHeadingContainer
                 idAttr={idAttr}
                 brandTitle={brandTitle}
@@ -164,12 +127,12 @@ const OnDemandRadioPage = ({ pageData, mediaIsAvailable, MediaError }) => {
               />
               <OnDemandParagraphContainer text={summary} />
             </Grid>
-            <Grid dir={dir} item columns={getGroups(0, 0, 2, 2, 2, 2)}>
-              <EpisodeImage imageUrl={imageUrl} dir={dir} />
+            <Grid item columns={getGroups(0, 0, 2, 2, 2, 2)}>
+              <EpisodeImage imageUrl={imageUrl} />
             </Grid>
           </StyledGelWrapperGrid>
           {mediaIsAvailable ? (
-            <StyledAudioPlayer
+            <AVPlayer
               assetId={episodeId}
               embedUrl={embedUrl}
               iframeTitle={iframeTitle}
@@ -201,9 +164,10 @@ const OnDemandRadioPage = ({ pageData, mediaIsAvailable, MediaError }) => {
                 : []
             }
           />
+          <RecentAudioEpisodes episodes={recentEpisodes} />
         </Grid>
-      </StyledGelPageGrid>
-      {radioScheduleIsEnabled && hasRadioScheduleData && (
+      </GelPageGrid>
+      {radioScheduleData && (
         <RadioScheduleContainer initialData={radioScheduleData} />
       )}
     </>

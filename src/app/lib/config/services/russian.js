@@ -63,7 +63,7 @@ const headerFooterTranslations = {
             'https://www.bbc.co.uk/usingthebbc/cookies/what-do-i-need-to-know-about-cookies/',
         },
       },
-      accept: 'Да, согласен',
+      accept: 'Да',
       reject: 'Нет, мне надо посмотреть настройки',
       rejectUrl:
         'https://www.bbc.co.uk/usingthebbc/cookies/how-can-i-change-my-bbc-cookie-settings/',
@@ -140,6 +140,7 @@ export const mainTranslations = {
     previousRadioShow: 'Предыдущая передача',
     nextRadioShow: 'Следующая передача',
     duration: 'Продолжительность',
+    recentEpisodes: 'Прошлые передачи',
   },
   socialEmbed: {
     caption: {
@@ -151,7 +152,7 @@ export const mainTranslations = {
       linkText: 'Смотреть еще в %provider_name%',
       linkTextSuffixVisuallyHidden: ', внешняя ссылка',
       warningText:
-        'Би-би-си на несет ответственности за содержание других сайтов.',
+        'Би-би-си не несёт ответственности за содержание других сайтов.',
     },
     skipLink: {
       text: 'Пропустить контент из %provider_name%',
@@ -195,6 +196,7 @@ export const service = {
     datetimeLocale: `ru`,
     service: 'russian',
     serviceName: 'Russian',
+    languageName: 'Russian',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcrussian',
     twitterSite: '@bbcrussian',
@@ -206,6 +208,7 @@ export const service = {
     manifestPath: '/manifest.json',
     swPath: '/sw.js',
     frontPageTitle: 'Главная',
+    iTunesAppId: 504278066,
     theming: {
       brandBackgroundColour: `${C_POSTBOX}`,
       brandLogoColour: `${C_WHITE}`,
@@ -255,7 +258,7 @@ export const service = {
           text: 'Куки',
         },
         {
-          href: 'https://www.bbc.com/russian/institutional-36517237',
+          href: 'https://www.bbc.co.uk/send/u50853643',
           text: 'Связаться с Би-би-си',
         },
         {
@@ -293,7 +296,7 @@ export const service = {
       },
       {
         title: 'Видео',
-        url: '/russian/media/video',
+        url: '/russian/in-depth-54439028',
       },
       {
         title: 'Фильмы',

@@ -1,7 +1,7 @@
-import { css } from 'styled-components';
 import {
   GEL_GROUP_2_SCREEN_WIDTH_MIN,
   GEL_GROUP_3_SCREEN_WIDTH_MIN,
+  GEL_GROUP_4_SCREEN_WIDTH_MIN,
 } from '@bbc/gel-foundations/breakpoints';
 import { GEL_SPACING, GEL_SPACING_DBL } from '@bbc/gel-foundations/spacings';
 
@@ -58,7 +58,7 @@ const LEADERBOARD_HEIGHTS = {
   hence the padding is set such that this is accounted for.
 */
 
-export const leaderboardStyles = css`
+export const leaderboardStyles = `
   display: none;
   visibility: hidden;
   @media (min-width: ${LEADERBOARD_WIDTH_MIN}) {
@@ -84,7 +84,22 @@ export const leaderboardStyles = css`
   }
 `;
 
-export const mpuStyles = css`
+export const ampLeaderboardStyles = `
+  display: none;
+  visibility: hidden;
+  @media (min-width: ${LEADERBOARD_WIDTH_MIN}) {
+    min-height: ${LEADERBOARD_HEIGHTS.GROUP_1};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    visibility: visible;
+  }
+  @media (min-width: ${GEL_GROUP_4_SCREEN_WIDTH_MIN}) {
+    min-height: ${LEADERBOARD_HEIGHTS.LARGE};
+  }
+`;
+
+export const mpuStyles = `
   display: none;
   visibility: hidden;
   padding: 0;
@@ -100,5 +115,18 @@ export const mpuStyles = css`
   }
   @media (min-width: ${GEL_GROUP_3_SCREEN_WIDTH_MIN}) {
     min-height: ${MPU_HEIGHTS.GROUP_3};
+  }
+`;
+
+export const ampMpuStyles = `
+  display: none;
+  visibility: hidden;
+  padding: 0;
+  @media (min-width: ${MPU_WIDTH_MIN}) {
+    min-height: ${MPU_HEIGHTS.GROUP_3};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    visibility: visible;
   }
 `;

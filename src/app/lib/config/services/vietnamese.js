@@ -33,6 +33,7 @@ export const service = {
     datetimeLocale: `vi`,
     service: 'vietnamese',
     serviceName: 'Tiếng Việt',
+    languageName: 'Vietnamese',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcvietnamese',
     twitterSite: '@bbcvietnamese',
@@ -155,6 +156,7 @@ export const service = {
         previousRadioShow: 'Show radio trước',
         nextRadioShow: 'Show radio sau',
         duration: 'Thời lượng',
+        recentEpisodes: 'Xem thêm',
       },
       socialEmbed: {
         caption: {
@@ -225,7 +227,7 @@ export const service = {
           text: 'Cookie',
         },
         {
-          href: 'https://www.bbc.com/vietnamese/institutional-37623842',
+          href: 'https://www.bbc.co.uk/send/u50853951',
           text: 'Liên hệ BBC',
         },
         {
@@ -247,31 +249,27 @@ export const service = {
       },
       {
         title: 'Việt Nam',
-        url: '/vietnamese/vietnam',
+        url: '/vietnamese/topics/ckdxnx1x5rnt',
       },
       {
         title: 'Thế giới',
-        url: '/vietnamese/world',
+        url: '/vietnamese/topics/cnlv9j1ekq0t',
       },
       {
         title: 'Diễn đàn',
-        url: '/vietnamese/forum',
+        url: '/vietnamese/forum-54540875',
       },
       {
         title: 'Kinh tế',
-        url: '/vietnamese/business',
+        url: '/vietnamese/topics/cez1ey7nzj3t',
       },
       {
         title: 'Nhịp sống mới',
-        url: '/vietnamese/magazine',
+        url: '/vietnamese/magazine-54029179',
       },
       {
         title: 'Thể thao',
-        url: '/vietnamese/sport',
-      },
-      {
-        title: 'Học tiếng Anh',
-        url: '/vietnamese/english',
+        url: '/vietnamese/topics/ckdxnx1k7zxt',
       },
       {
         title: 'Video',

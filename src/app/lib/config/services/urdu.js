@@ -2,8 +2,8 @@ import { C_POSTBOX, C_WHITE } from '@bbc/psammead-styles/colours';
 import { arabic } from '@bbc/gel-foundations/scripts';
 import { urdu as brandSVG } from '@bbc/psammead-assets/svgs';
 import {
-  F_NASSIM_URDU_REGULAR,
-  F_NASSIM_URDU_BOLD,
+  F_REITH_QALAM_REGULAR,
+  F_REITH_QALAM_BOLD,
 } from '@bbc/psammead-styles/fonts';
 import '@bbc/moment-timezone-include/tz/Asia/Karachi';
 import '@bbc/psammead-locales/moment/ur';
@@ -35,6 +35,7 @@ export const service = {
     datetimeLocale: 'ur',
     service: 'urdu',
     serviceName: 'Urdu',
+    languageName: 'Urdu',
     serviceLocalizedName: 'اردو',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcurdu',
@@ -158,6 +159,7 @@ export const service = {
         previousRadioShow: 'گذشتہ ریڈیو پروگرام',
         nextRadioShow: 'اگلا ریڈیو پروگرام',
         duration: 'دورانیہ',
+        recentEpisodes: 'سابق پروگرام',
       },
       socialEmbed: {
         caption: {
@@ -198,9 +200,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onLiveRadioPage: true,
-      onOnDemandRadioPage: true,
-      onFrontPage: false,
       header: 'ایف ایم بلیٹن',
       durationLabel: '%duration% دورانیہ',
     },
@@ -235,7 +234,7 @@ export const service = {
           text: 'کوکیز',
         },
         {
-          href: 'https://www.bbc.com/urdu/institutional-37588285',
+          href: 'https://www.bbc.co.uk/send/u50853907',
           text: 'بی بی سی سے رابطہ کریں',
         },
         {
@@ -248,7 +247,7 @@ export const service = {
       copyrightText:
         'بی بی سی. بی بی سی بیرونی ویب سائٹس کے مواد کا ذمہ دار نہیں',
     },
-    fonts: [F_NASSIM_URDU_REGULAR, F_NASSIM_URDU_BOLD],
+    fonts: [F_REITH_QALAM_REGULAR, F_REITH_QALAM_BOLD],
     timezone: 'Asia/Karachi',
     navigation: [
       {
@@ -257,35 +256,31 @@ export const service = {
       },
       {
         title: 'پاکستان',
-        url: '/urdu/pakistan',
+        url: '/urdu/topics/cjgn7n9zzq7t',
       },
       {
         title: 'آس پاس',
-        url: '/urdu/regional',
+        url: '/urdu/topics/cl8l9mveql2t',
       },
       {
         title: 'ورلڈ',
-        url: '/urdu/world',
+        url: '/urdu/topics/cw57v2pmll9t',
       },
       {
         title: 'کھیل',
-        url: '/urdu/sport',
+        url: '/urdu/topics/c340q0p2585t',
       },
       {
         title: 'فن فنکار',
-        url: '/urdu/entertainment',
+        url: '/urdu/topics/ckdxnx900n5t',
       },
       {
         title: 'سائنس',
-        url: '/urdu/science',
+        url: '/urdu/topics/c40379e2ymxt',
       },
       {
         title: 'ویڈیو',
         url: '/urdu/media/video',
-      },
-      {
-        title: 'پنجابی ويڈیو',
-        url: '/urdu/punjabi_video',
       },
     ],
   },

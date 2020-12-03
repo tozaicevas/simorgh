@@ -32,6 +32,7 @@ export const service = {
     datetimeLocale: `so`,
     service: 'somali',
     serviceName: 'Somali',
+    languageName: 'Somali',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcsomali',
     twitterSite: '@bbcsomali',
@@ -170,6 +171,7 @@ export const service = {
         previousRadioShow: 'Barnaamijyadii hore ee Raadiyaha',
         nextRadioShow: 'Barnaamijka Xiga ee Raadiyaha',
         duration: 'Muddada',
+        recentEpisodes: 'Barnaamijyadii Hore',
       },
       socialEmbed: {
         caption: {
@@ -211,10 +213,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onLiveRadioPage: true,
-      onOnDemandRadioPage: true,
-      onFrontPage: true,
-      frontPagePosition: 'Features',
       header: 'Barnaamijyada Idaacadda',
       durationLabel: 'Muddada %duration%',
     },
@@ -248,7 +246,7 @@ export const service = {
           text: 'Cookies',
         },
         {
-          href: 'https://www.bbc.com/somali/hayadeed-37098613',
+          href: 'https://www.bbc.co.uk/send/u50853709',
           text: 'La xiriir BBC',
         },
         {
@@ -269,20 +267,12 @@ export const service = {
         url: '/somali',
       },
       {
-        title: 'Warar dheeraad ah',
-        url: '/somali/war',
-      },
-      {
         title: 'Ganacsi',
-        url: '/somali/topics/2f2db234-3c2d-40a4-b4ac-eea661faadd0',
+        url: '/somali/topics/c2dwqd32v4yt',
       },
       {
         title: 'Cayaaraha',
-        url: '/somali/cayaaraha',
-      },
-      {
-        title: 'Aqoon Guud',
-        url: '/somali/aqoon_guud',
+        url: '/somali/topics/cpzd4zj1pn2t',
       },
       {
         title: 'Muuqaal',
@@ -290,7 +280,7 @@ export const service = {
       },
       {
         title: 'Barnaamijyada Idaacadda',
-        url: '/somali/ka_qayb_gal/programmes',
+        url: '/somali/media-54071665',
       },
     ],
   },

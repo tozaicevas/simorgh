@@ -97,7 +97,7 @@ exports[`AMP Most Read Page Analytics ATI 1`] = `
 Object {
   "requests": Object {
     "base": "https://logws1363.ati-host.net?",
-    "pageview": "\${base}s=598343&s2=97&p=vietnamese.popular.read.page&r=\${screenWidth}x\${screenHeight}x\${screenColorDepth}&re=\${availableScreenWidth}x\${availableScreenHeight}&hl=\${timestamp}&lng=\${browserLanguage}&x2=[amp]&x3=[news-vietnamese]&x4=[vi]&x5=[\${sourceUrl}]&x6=[\${documentReferrer}]&x7=[list-datadriven]&x8=[simorgh]&x9=[Đọc+nhiều+nhất+-+BBC+News+Tiếng+Việt]&x11=[2019-11-06T16:54:00Z]&x12=[2100-11-06T17:09:00Z]&ref=\${documentReferrer}",
+    "pageview": "\${base}s=598343&s2=97&p=vietnamese.popular.read.page&r=\${screenWidth}x\${screenHeight}x\${screenColorDepth}&re=\${availableScreenWidth}x\${availableScreenHeight}&hl=\${timestamp}&lng=\${browserLanguage}&x2=[amp]&x3=[news-vietnamese]&x4=[vi]&x5=[\${sourceUrl}]&x6=[\${documentReferrer}]&x7=[list-datadriven]&x8=[simorgh]&x9=[%C4%90%E1%BB%8Dc%2Bnhi%E1%BB%81u%2Bnh%E1%BA%A5t%2B-%2BBBC%2BNews%2BTi%E1%BA%BFng%2BVi%E1%BB%87t]&x11=[2019-11-06T16%3A54%3A00Z]&x12=[2100-11-06T17%3A09%3A00Z]&ref=\${documentReferrer}",
   },
   "transport": Object {
     "beacon": false,
@@ -186,7 +186,7 @@ Object {
 exports[`AMP Most Read Page Footer Link should match text and url 7`] = `
 Object {
   "text": "Liên hệ BBC",
-  "url": "https://www.bbc.com/vietnamese/institutional-37623842",
+  "url": "https://www.bbc.co.uk/send/u50853951",
 }
 `;
 
@@ -216,53 +216,46 @@ Object {
 exports[`AMP Most Read Page Header Navigation link should match text and url 2`] = `
 Object {
   "text": "Việt Nam",
-  "url": "/vietnamese/vietnam",
+  "url": "/vietnamese/topics/ckdxnx1x5rnt",
 }
 `;
 
 exports[`AMP Most Read Page Header Navigation link should match text and url 3`] = `
 Object {
   "text": "Thế giới",
-  "url": "/vietnamese/world",
+  "url": "/vietnamese/topics/cnlv9j1ekq0t",
 }
 `;
 
 exports[`AMP Most Read Page Header Navigation link should match text and url 4`] = `
 Object {
   "text": "Diễn đàn",
-  "url": "/vietnamese/forum",
+  "url": "/vietnamese/forum-54540875",
 }
 `;
 
 exports[`AMP Most Read Page Header Navigation link should match text and url 5`] = `
 Object {
   "text": "Kinh tế",
-  "url": "/vietnamese/business",
+  "url": "/vietnamese/topics/cez1ey7nzj3t",
 }
 `;
 
 exports[`AMP Most Read Page Header Navigation link should match text and url 6`] = `
 Object {
   "text": "Nhịp sống mới",
-  "url": "/vietnamese/magazine",
+  "url": "/vietnamese/magazine-54029179",
 }
 `;
 
 exports[`AMP Most Read Page Header Navigation link should match text and url 7`] = `
 Object {
   "text": "Thể thao",
-  "url": "/vietnamese/sport",
+  "url": "/vietnamese/topics/ckdxnx1k7zxt",
 }
 `;
 
 exports[`AMP Most Read Page Header Navigation link should match text and url 8`] = `
-Object {
-  "text": "Học tiếng Anh",
-  "url": "/vietnamese/english",
-}
-`;
-
-exports[`AMP Most Read Page Header Navigation link should match text and url 9`] = `
 Object {
   "text": "Video",
   "url": "/vietnamese/media/video",
@@ -290,6 +283,8 @@ exports[`AMP Most Read Page I can see the list items 8`] = `"8Vụ 39 người c
 exports[`AMP Most Read Page I can see the list items 9`] = `"9HRW kêu gọi trả tự do cho nhà hoạt động Nguyễn Ngọc ÁnhCập nhật gần nhất: 6 tháng 11 năm 2019"`;
 
 exports[`AMP Most Read Page I can see the list items 10`] = `"10Lỗ hổng thiên đàng và một căn bệnh mãn tínhCập nhật gần nhất: 6 tháng 11 năm 2019"`;
+
+exports[`AMP Most Read Page Main heading should match text 1`] = `"Đọc nhiều nhất"`;
 
 exports[`AMP Most Read Page SEO Apple Touch Icon should match attributes 1`] = `
 Object {
@@ -384,6 +379,11 @@ Object {
         "height": 576,
         "url": "https://news.files.bbci.co.uk/ws/img/logos/og/vietnamese.png",
         "width": 1024,
+      },
+      "inLanguage": Object {
+        "@type": "Language",
+        "alternateName": "vi",
+        "name": "Vietnamese",
       },
       "mainEntityOfPage": Object {
         "@id": "http://localhost:7080/vietnamese/popular/read",

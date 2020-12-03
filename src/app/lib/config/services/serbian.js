@@ -18,6 +18,7 @@ const baseServiceConfig = {
   defaultImage: 'https://news.files.bbci.co.uk/ws/img/logos/og/serbian.png',
   dir: `ltr`,
   service: 'serbian',
+  languageName: 'Serbian',
   themeColor: `${C_POSTBOX}`,
   twitterCreator: '@bbcnasrpskom',
   twitterSite: '@bbcnasrpskom',
@@ -93,7 +94,7 @@ export const service = {
           text: 'Kolačići',
         },
         {
-          href: 'https://www.bbc.com/serbian/lat/institutional-43543431',
+          href: 'https://www.bbc.co.uk/send/u50853665',
           text: 'Kontaktirajte BBC',
         },
         {
@@ -127,15 +128,15 @@ export const service = {
       },
       {
         title: 'Srbija',
-        url: '/serbian/lat/topics/1791445f-977a-4e6d-b490-51f84bb4fc52',
+        url: '/serbian/lat/topics/cr50vdy9q6wt',
       },
       {
         title: 'Balkan',
-        url: '/serbian/lat/balkan',
+        url: '/serbian/lat/topics/c06g87137jgt',
       },
       {
         title: 'Svet',
-        url: '/serbian/lat/svet',
+        url: '/serbian/lat/topics/c2lej05e1eqt',
       },
       {
         title: 'Video',
@@ -374,15 +375,15 @@ export const service = {
       },
       {
         title: 'Србија',
-        url: '/serbian/cyr/topics/1791445f-977a-4e6d-b490-51f84bb4fc52',
+        url: '/serbian/cyr/topics/cvjp1d3k9dvt',
       },
       {
         title: 'Балкан',
-        url: '/serbian/cyr/balkan',
+        url: '/serbian/cyr/topics/c8y9k0k2pvvt',
       },
       {
         title: 'Свет',
-        url: '/serbian/cyr/svet',
+        url: '/serbian/cyr/topics/c3m1x951mljt',
       },
       {
         title: 'Видео',
@@ -508,6 +509,7 @@ export const service = {
         previousRadioShow: 'Претходна радио емисија',
         nextRadioShow: 'Следећа радио емисија',
         duration: 'Трајање',
+        recentEpisodes: 'Претходне епизоде',
       },
       socialEmbed: {
         caption: {

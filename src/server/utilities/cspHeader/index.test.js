@@ -7,7 +7,9 @@ import injectCspHeader, {
   generateImgSrc,
   generateScriptSrc,
   generateStyleSrc,
+  generateMediaSrc,
   generateWorkerSrc,
+  generatePrefetchSrc,
 } from '.';
 
 const next = jest.fn();
@@ -25,6 +27,7 @@ describe('cspHeader', () => {
       urlExample: 'https://www.bbc.com/pidgin.amp',
       childSrcExpectation: ['blob:'],
       connectSrcExpectation: [
+        'https://flagpoles.gnl-live.bbcverticals.com',
         'https://*.akamaihd.net',
         'https://a1.api.bbc.co.uk/hit.xiti',
         'https://config.api.bbci.co.uk',
@@ -46,6 +49,9 @@ describe('cspHeader', () => {
         'https://www.live.bbc.co.uk',
         'https://adservice.google.com',
         'https://tpc.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://securepubads.g.doubleclick.net',
         "'self'",
       ],
       defaultSrcExpectation: [
@@ -56,6 +62,8 @@ describe('cspHeader', () => {
       fontSrcExpectation: [
         'https://gel.files.bbci.co.uk',
         'https://ws-downloads.files.bbci.co.uk',
+        'https://news.files.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
       ],
       frameSrcExpectation: [
         'https://polling.bbc.co.uk',
@@ -63,11 +71,15 @@ describe('cspHeader', () => {
         'https://www.instagram.com',
         'https://*.ampproject.net',
         'https://news.files.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
+        'https://www.riddle.com',
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://bcp.crwdcntrl.net',
         'https://edigitalsurvey.com',
         'https://*.safeframe.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://secureframe.doubleclick.net',
         "'self'",
       ],
       imgSrcExpectation: [
@@ -87,6 +99,17 @@ describe('cspHeader', () => {
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://*.google.com',
+        'https://dt.adsafeprotected.com',
+        'https://dtvc.adsafeprotected.com',
+        'https://fwvc.adsafeprotected.com',
+        'https://pixel.adsafeprotected.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://static.doubleclick.net',
+        'https://www.gstatic.com',
+        'https://securepubads.g.doubleclick.net',
+        'https://*.googleusercontent.com',
+        'https://static.files.bbci.co.uk',
         "data: 'self'",
       ],
       scriptSrcExpectation: [
@@ -94,11 +117,22 @@ describe('cspHeader', () => {
         'https://cdn.ampproject.org',
         'https://*.chartbeat.com',
         'https://platform.twitter.com',
+        'https://static.files.bbci.co.uk',
         "'self'",
         "'unsafe-inline'",
       ],
-      styleSrcExpectation: ['https://news.files.bbci.co.uk', "'unsafe-inline'"],
+      styleSrcExpectation: [
+        'https://news.files.bbci.co.uk',
+        'https://static.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
+        "'unsafe-inline'",
+      ],
+      mediaSrcExpectation: [
+        'https://news.files.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
+      ],
       workerSrcExpectation: ['blob:'],
+      prefetchSrcExpectation: ['https://*.safeframe.googlesyndication.com'],
     },
     {
       isAmp: false,
@@ -107,6 +141,7 @@ describe('cspHeader', () => {
       urlExample: 'https://www.bbc.com/pidgin',
       childSrcExpectation: ["'self'"],
       connectSrcExpectation: [
+        'https://flagpoles.gnl-live.bbcverticals.com',
         'https://*.akamaihd.net',
         'https://a1.api.bbc.co.uk/hit.xiti',
         'https://config.api.bbci.co.uk',
@@ -114,7 +149,9 @@ describe('cspHeader', () => {
         'https://cookie-oven.api.bbc.co.uk',
         'https://www.bbc.co.uk',
         'https://news.files.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
         'https://mybbc-analytics.files.bbci.co.uk',
+        'https://europe-west1-bbc-otg-traf-mgr-bq-prod-4591.cloudfunctions.net',
         'https://csi.gstatic.com',
         'https://experience.tinypass.com',
         'https://pagead2.googlesyndication.com',
@@ -127,6 +164,9 @@ describe('cspHeader', () => {
         'https://www.live.bbc.co.uk',
         'https://adservice.google.com',
         'https://tpc.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://securepubads.g.doubleclick.net',
         "'self'",
       ],
       defaultSrcExpectation: [
@@ -138,9 +178,10 @@ describe('cspHeader', () => {
         'https://gel.files.bbci.co.uk',
         'https://ws-downloads.files.bbci.co.uk',
         'https://static.bbci.co.uk',
+        'https://news.files.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
       ],
       frameSrcExpectation: [
-        'https://polling.bbc.co.uk',
         'https://emp.bbc.com',
         'https://emp.bbc.co.uk',
         'https://chartbeat.com',
@@ -150,13 +191,20 @@ describe('cspHeader', () => {
         'https://www.instagram.com',
         'https://syndication.twitter.com',
         'https://news.files.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
         'https://www.bbc.co.uk',
+        'https://bbc.com',
+        'https://www.bbc.com',
         'https://bbc-maps.carto.com',
+        'https://flo.uri.sh',
+        'https://www.riddle.com',
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://bcp.crwdcntrl.net',
         'https://edigitalsurvey.com',
         'https://*.safeframe.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://secureframe.doubleclick.net',
         "'self'",
       ],
       imgSrcExpectation: [
@@ -172,6 +220,7 @@ describe('cspHeader', () => {
         'https://ton.twimg.com',
         'https://news.bbcimg.co.uk',
         'https://static.bbc.co.uk',
+        'https://static.files.bbci.co.uk',
         'https://collector.effectivemeasure.net',
         'https://csi.gstatic.com',
         'https://pagead2.googlesyndication.com',
@@ -180,6 +229,17 @@ describe('cspHeader', () => {
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://*.google.com',
+        'https://dt.adsafeprotected.com',
+        'https://dtvc.adsafeprotected.com',
+        'https://fwvc.adsafeprotected.com',
+        'https://pixel.adsafeprotected.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://static.doubleclick.net',
+        'https://www.gstatic.com',
+        'https://securepubads.g.doubleclick.net',
+        'https://*.googleusercontent.com',
+        'https://static.files.bbci.co.uk',
         "data: 'self'",
       ],
       scriptSrcExpectation: [
@@ -196,10 +256,11 @@ describe('cspHeader', () => {
         'https://passport-control.int.tools.bbc.co.uk/bookmarkletScript.js',
         'https://passport-control.test.tools.bbc.co.uk/bookmarkletScript.js',
         'https://passport-control.tools.bbc.co.uk/bookmarkletScript.js',
+        'https://public.flourish.studio',
+        'https://static.files.bbci.co.uk',
         'https://ad.crwdcntrl.net',
         'https://adservice.google.co.uk',
         'https://adservice.google.com',
-        'https://bbc.gscontxt.net',
         'https://bcp.crwdcntrl.net',
         'https://cdn.ampproject.org',
         'https://collector.effectivemeasure.net',
@@ -214,6 +275,8 @@ describe('cspHeader', () => {
         'https://tpc.googlesyndication.com',
         'https://gn-web-assets.api.bbc.com',
         'https://www.googletagservices.com',
+        'https://securepubads.g.doubleclick.net',
+        'https://bbc.gscontxt.net',
         "'self'",
         "'unsafe-inline'",
       ],
@@ -223,9 +286,16 @@ describe('cspHeader', () => {
         'https://ton.twimg.com',
         'https://news.files.bbci.co.uk',
         'https://static.bbc.co.uk',
+        'https://static.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
         "'unsafe-inline'",
       ],
+      mediaSrcExpectation: [
+        'https://news.files.bbci.co.uk',
+        'https://static.files.bbci.co.uk',
+      ],
       workerSrcExpectation: ["'self'"],
+      prefetchSrcExpectation: ['https://*.safeframe.googlesyndication.com'],
     },
     {
       isAmp: true,
@@ -234,6 +304,7 @@ describe('cspHeader', () => {
       urlExample: 'https://www.test.bbc.com/pidgin.amp',
       childSrcExpectation: ['blob:'],
       connectSrcExpectation: [
+        'https://flagpoles.gnl-test.bbcverticals.com',
         'https://*.akamaihd.net',
         'https://cdn.ampproject.org',
         'https://*.ampproject.net',
@@ -243,6 +314,7 @@ describe('cspHeader', () => {
         'https://www.bbc.co.uk',
         'https://platform.twitter.com',
         'https://mybbc-analytics.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
         'https://csi.gstatic.com',
         'https://experience.tinypass.com',
         'https://pagead2.googlesyndication.com',
@@ -255,6 +327,9 @@ describe('cspHeader', () => {
         'https://www.live.bbc.co.uk',
         'https://adservice.google.com',
         'https://tpc.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://securepubads.g.doubleclick.net',
         "'self'",
       ],
       defaultSrcExpectation: [
@@ -265,6 +340,8 @@ describe('cspHeader', () => {
       fontSrcExpectation: [
         'https://gel.files.bbci.co.uk',
         'https://ws-downloads.files.bbci.co.uk',
+        'https://news.test.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
       ],
       frameSrcExpectation: [
         'https://polling.bbc.co.uk',
@@ -274,11 +351,15 @@ describe('cspHeader', () => {
         'https://*.ampproject.net',
         'https://news.files.bbci.co.uk',
         'https://news.test.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
+        'https://www.riddle.com',
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://bcp.crwdcntrl.net',
         'https://edigitalsurvey.com',
         'https://*.safeframe.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://secureframe.doubleclick.net',
         "'self'",
       ],
       imgSrcExpectation: [
@@ -303,6 +384,17 @@ describe('cspHeader', () => {
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://*.google.com',
+        'https://dt.adsafeprotected.com',
+        'https://dtvc.adsafeprotected.com',
+        'https://fwvc.adsafeprotected.com',
+        'https://pixel.adsafeprotected.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://static.doubleclick.net',
+        'https://www.gstatic.com',
+        'https://securepubads.g.doubleclick.net',
+        'https://*.googleusercontent.com',
+        'https://static.test.files.bbci.co.uk',
         "data: 'self'",
       ],
       scriptSrcExpectation: [
@@ -311,11 +403,23 @@ describe('cspHeader', () => {
         'https://cdn.ampproject.org',
         'https://*.chartbeat.com',
         'https://platform.twitter.com',
+        'https://static.test.files.bbci.co.uk',
         "'self'",
         "'unsafe-inline'",
       ],
-      styleSrcExpectation: ['https://news.files.bbci.co.uk', "'unsafe-inline'"],
+      styleSrcExpectation: [
+        'https://news.files.bbci.co.uk',
+        'https://static.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
+        "'unsafe-inline'",
+      ],
+      mediaSrcExpectation: [
+        'https://news.files.bbci.co.uk',
+        'https://news.test.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
+      ],
       workerSrcExpectation: ['blob:'],
+      prefetchSrcExpectation: ['https://*.safeframe.googlesyndication.com'],
     },
     {
       isAmp: false,
@@ -324,6 +428,7 @@ describe('cspHeader', () => {
       urlExample: 'https://www.test.bbc.com/pidgin',
       childSrcExpectation: ["'self'"],
       connectSrcExpectation: [
+        'https://flagpoles.gnl-test.bbcverticals.com',
         'https://*.akamaihd.net',
         'https://logws1363.ati-host.net',
         'https://config.test.api.bbci.co.uk',
@@ -334,8 +439,10 @@ describe('cspHeader', () => {
         'https://www.bbc.com',
         'https://www.bbc.co.uk',
         'https://news.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
         'https://news.test.files.bbci.co.uk',
         'https://mybbc-analytics.files.bbci.co.uk',
+        'https://europe-west1-bbc-otg-traf-mgr-bq-dev-4105.cloudfunctions.net',
         'https://csi.gstatic.com',
         'https://experience.tinypass.com',
         'https://pagead2.googlesyndication.com',
@@ -348,6 +455,9 @@ describe('cspHeader', () => {
         'https://www.live.bbc.co.uk',
         'https://adservice.google.com',
         'https://tpc.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://securepubads.g.doubleclick.net',
         "'self'",
       ],
       defaultSrcExpectation: [
@@ -359,10 +469,10 @@ describe('cspHeader', () => {
         'https://gel.files.bbci.co.uk',
         'https://ws-downloads.files.bbci.co.uk',
         'https://static.bbci.co.uk',
+        'https://news.test.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
       ],
       frameSrcExpectation: [
-        'https://polling.bbc.co.uk',
-        'https://polling.test.bbc.co.uk',
         'https://emp.bbc.com',
         'https://emp.bbc.co.uk',
         'https://chartbeat.com',
@@ -374,13 +484,21 @@ describe('cspHeader', () => {
         'https://news.files.bbci.co.uk',
         'https://www.bbc.co.uk',
         'http://www.bbc.co.uk',
+        'https://test.bbc.com',
+        'https://www.bbc.com',
+        'https://bbc.com',
         'https://bbc-maps.carto.com',
         'https://news.test.files.bbci.co.uk',
+        'https://flo.uri.sh',
+        'https://www.riddle.com',
+        'https://static.test.files.bbci.co.uk',
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://bcp.crwdcntrl.net',
         'https://edigitalsurvey.com',
         'https://*.safeframe.googlesyndication.com',
+        'https://ad.doubleclick.net',
+        'https://secureframe.doubleclick.net',
         "'self'",
       ],
       imgSrcExpectation: [
@@ -402,6 +520,7 @@ describe('cspHeader', () => {
         'https://news.bbcimg.co.uk',
         'https://static.bbc.co.uk',
         'http://static.bbc.co.uk',
+        'https://static.files.bbci.co.uk',
         'https://collector.effectivemeasure.net',
         'https://csi.gstatic.com',
         'https://pagead2.googlesyndication.com',
@@ -410,6 +529,17 @@ describe('cspHeader', () => {
         'https://*.g.doubleclick.net',
         'https://tpc.googlesyndication.com',
         'https://*.google.com',
+        'https://dt.adsafeprotected.com',
+        'https://dtvc.adsafeprotected.com',
+        'https://fwvc.adsafeprotected.com',
+        'https://pixel.adsafeprotected.com',
+        'https://ad.doubleclick.net',
+        'https://googleads.g.doubleclick.net',
+        'https://static.doubleclick.net',
+        'https://www.gstatic.com',
+        'https://securepubads.g.doubleclick.net',
+        'https://*.googleusercontent.com',
+        'https://static.test.files.bbci.co.uk',
         "data: 'self'",
       ],
       scriptSrcExpectation: [
@@ -430,10 +560,12 @@ describe('cspHeader', () => {
         'https://passport-control.int.tools.bbc.co.uk/bookmarkletScript.js',
         'https://passport-control.test.tools.bbc.co.uk/bookmarkletScript.js',
         'https://passport-control.tools.bbc.co.uk/bookmarkletScript.js',
+        'https://public.flourish.studio',
+        'https://static.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
         'https://ad.crwdcntrl.net',
         'https://adservice.google.co.uk',
         'https://adservice.google.com',
-        'https://bbc.gscontxt.net',
         'https://bcp.crwdcntrl.net',
         'https://cdn.ampproject.org',
         'https://collector.effectivemeasure.net',
@@ -448,6 +580,8 @@ describe('cspHeader', () => {
         'https://tpc.googlesyndication.com',
         'https://gn-web-assets.api.bbc.com',
         'https://www.googletagservices.com',
+        'https://securepubads.g.doubleclick.net',
+        'https://bbc.gscontxt.net',
         "'self'",
         "'unsafe-inline'",
       ],
@@ -459,9 +593,17 @@ describe('cspHeader', () => {
         'https://news.test.files.bbci.co.uk',
         'https://static.bbc.co.uk',
         'http://static.bbc.co.uk',
+        'https://static.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
         "'unsafe-inline'",
       ],
+      mediaSrcExpectation: [
+        'https://news.files.bbci.co.uk',
+        'https://news.test.files.bbci.co.uk',
+        'https://static.test.files.bbci.co.uk',
+      ],
       workerSrcExpectation: ["'self'"],
+      prefetchSrcExpectation: ['https://*.safeframe.googlesyndication.com'],
     },
   ].forEach(
     ({
@@ -477,7 +619,9 @@ describe('cspHeader', () => {
       imgSrcExpectation,
       scriptSrcExpectation,
       styleSrcExpectation,
+      mediaSrcExpectation,
       workerSrcExpectation,
+      prefetchSrcExpectation,
     }) => {
       describe(`Given isAmp ${isAmp} & isLive ${isLive}`, () => {
         it(`Then it has this childSrc`, () => {
@@ -499,7 +643,9 @@ describe('cspHeader', () => {
         });
 
         it(`Then it has this fontSrc`, () => {
-          expect(generateFontSrc({ isAmp })).toEqual(fontSrcExpectation);
+          expect(generateFontSrc({ isAmp, isLive })).toEqual(
+            fontSrcExpectation,
+          );
         });
 
         it(`Then it has this frameSrc`, () => {
@@ -524,8 +670,20 @@ describe('cspHeader', () => {
           );
         });
 
+        it(`Then it has this mediaSrc`, () => {
+          expect(generateMediaSrc({ isAmp, isLive })).toEqual(
+            mediaSrcExpectation,
+          );
+        });
+
         it(`Then it has this workerSrc`, () => {
           expect(generateWorkerSrc({ isAmp })).toEqual(workerSrcExpectation);
+        });
+
+        it(`Then it has this prefetchSrc`, () => {
+          expect(generatePrefetchSrc({ isAmp, isLive })).toEqual(
+            prefetchSrcExpectation,
+          );
         });
 
         it(`Then injectCspHeader middleware applies the correct Content-Security-Policy header`, () => {
@@ -550,16 +708,18 @@ describe('cspHeader', () => {
           expect(next).toHaveBeenCalled();
 
           const expectedCSPHeaderString =
-            `default-src ${defaultSrcExpectation.join(' ')}; ` +
-            `child-src ${childSrcExpectation.join(' ')}; ` +
-            `connect-src ${connectSrcExpectation.join(' ')}; ` +
-            `font-src ${fontSrcExpectation.join(' ')}; ` +
-            `frame-src ${frameSrcExpectation.join(' ')}; ` +
-            `img-src ${imgSrcExpectation.join(' ')}; ` +
-            `script-src ${scriptSrcExpectation.join(' ')}; ` +
-            `style-src ${styleSrcExpectation.join(' ')}; ` +
-            `worker-src ${workerSrcExpectation.join(' ')}; ` +
-            `report-to default; ` +
+            `default-src ${defaultSrcExpectation.join(' ')};` +
+            `child-src ${childSrcExpectation.join(' ')};` +
+            `connect-src ${connectSrcExpectation.join(' ')};` +
+            `font-src ${fontSrcExpectation.join(' ')};` +
+            `frame-src ${frameSrcExpectation.join(' ')};` +
+            `img-src ${imgSrcExpectation.join(' ')};` +
+            `script-src ${scriptSrcExpectation.join(' ')};` +
+            `style-src ${styleSrcExpectation.join(' ')};` +
+            `media-src ${mediaSrcExpectation.join(' ')};` +
+            `worker-src ${workerSrcExpectation.join(' ')};` +
+            `prefetch-src ${prefetchSrcExpectation.join(' ')};` +
+            `report-to default;` +
             `upgrade-insecure-requests`;
 
           expect(headers['Content-Security-Policy']).toEqual(

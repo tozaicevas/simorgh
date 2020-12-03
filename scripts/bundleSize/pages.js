@@ -1,11 +1,15 @@
 exports.pages = [
   'ArticlePage',
-  'MediaAssetPage',
-  'PhotoGalleryPage',
-  'StoryPage',
+  'ErrorPage',
   'FrontPage',
+  'IdxPage',
   'MostReadPage',
   'LiveRadioPage',
+  'MediaAssetPage',
+  'MostReadPage',
+  'MostWatchedPage',
   'OnDemandRadioPage',
   'OnDemandTvPage',
+  'PhotoGalleryPage',
+  'StoryPage',
 ];

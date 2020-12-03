@@ -32,6 +32,7 @@ export const service = {
     datetimeLocale: `ha`,
     service: 'hausa',
     serviceName: 'Hausa',
+    languageName: 'Hausa',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbchausa',
     twitterSite: '@bbchausa',
@@ -164,6 +165,7 @@ export const service = {
         previousRadioShow: 'Shirye-shiryen rediyo da suka gabata',
         nextRadioShow: 'Shirye-shiryen rediyo na gaba',
         duration: 'Tsawon lokaci',
+        recentEpisodes: 'Kari',
       },
       socialEmbed: {
         caption: {
@@ -205,11 +207,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onLiveRadioPage: true,
-      onOnDemandRadioPage: true,
-      onFrontPage: true,
-      frontPagePosition: 'Verticals',
-      frequenciesPageUrl: '/hausa/institutional/2011/11/000001_mitocinmu',
       frequenciesPageLabel: 'Mitocinmu da sauko da sautin labarai',
       header: 'Shirye-shiryenmu',
       durationLabel: 'Tsawon lokaci %duration%',
@@ -244,7 +241,7 @@ export const service = {
           text: "Ka'idoji",
         },
         {
-          href: 'https://www.bbc.com/hausa/game-da-mu-37377092',
+          href: 'https://www.bbc.co.uk/send/u50853335',
           text: 'Tuntubi BBC',
         },
         {
@@ -266,11 +263,11 @@ export const service = {
       },
       {
         title: 'Wasanni',
-        url: '/hausa/wasanni',
+        url: '/hausa/topics/cz74kjgv220t',
       },
       {
         title: 'Nishadi',
-        url: '/hausa/topics/1c3b60a9-14eb-484b-a750-9f5b1aeaac31',
+        url: '/hausa/topics/cg726kz37wdt',
       },
       {
         title: 'Cikakkun Rahotanni',
@@ -282,7 +279,7 @@ export const service = {
       },
       {
         title: 'Shirye-shirye na Musamman',
-        url: '/hausa/shirye_shirye_na_musamman',
+        url: '/hausa/shirye-shirye-na-musamman-54712348',
       },
       {
         title: 'Shirye-shiryen rediyo',

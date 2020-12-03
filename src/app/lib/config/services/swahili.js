@@ -32,6 +32,7 @@ export const service = {
     datetimeLocale: `sw`,
     service: 'swahili',
     serviceName: 'Swahili',
+    languageName: 'Swahili',
     themeColor: `${C_POSTBOX}`,
     twitterCreator: '@bbcswahili',
     twitterSite: '@bbcswahili',
@@ -166,6 +167,7 @@ export const service = {
         previousRadioShow: 'Kipindi kilichopita cha redio',
         nextRadioShow: 'Kipindi kijacho cha redio',
         duration: 'Muda',
+        recentEpisodes: 'Vipindi vilivyopita',
       },
       socialEmbed: {
         caption: {
@@ -205,10 +207,6 @@ export const service = {
     },
     radioSchedule: {
       hasRadioSchedule: true,
-      onLiveRadioPage: true,
-      onOnDemandRadioPage: true,
-      onFrontPage: true,
-      frontPagePosition: 'Features',
       header: 'Vipindi vya Redio',
       durationLabel: 'Muda %duration%',
     },
@@ -242,7 +240,7 @@ export const service = {
           text: 'Cookies',
         },
         {
-          href: 'https://www.bbc.com/swahili/taasisi-37100011',
+          href: 'https://www.bbc.co.uk/send/u50853731',
           text: 'Wasiliana na BBC',
         },
         {
@@ -263,7 +261,7 @@ export const service = {
       },
       {
         title: 'Michezo',
-        url: '/swahili/michezo',
+        url: '/swahili/topics/ckdxndddjkxt',
       },
       {
         title: 'Video',
@@ -271,7 +269,7 @@ export const service = {
       },
       {
         title: 'Vipindi vya Redio',
-        url: '/swahili/kwa_kina/redio',
+        url: '/swahili/media-54071673',
       },
     ],
   },
