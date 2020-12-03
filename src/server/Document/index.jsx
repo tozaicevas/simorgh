@@ -16,7 +16,7 @@ const renderDocument = async ({
   isAmp,
   routes,
   service,
-  url,
+  url
 }) => {
   const cache = createCache();
   const { extractCritical } = createEmotionServer(cache);

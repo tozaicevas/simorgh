@@ -55,7 +55,8 @@ const MpuContainer = styled(AdContainer)`
 `;
 
 const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
-  const [showFullStory, setShowFullStory] = useState(false)
+  const { isAmp, showAdsBasedOnLocation, referrer } = useContext(RequestContext);
+  const [showFullStory, setShowFullStory] = useState(referrer != 'social' ? true : false)
   const {
     dir,
     mostRead: { header },
@@ -143,7 +144,6 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
 
   // ads
   const { enabled: adsEnabled } = useToggle('ads');
-  const { isAmp, showAdsBasedOnLocation } = useContext(RequestContext);
   const adcampaign = path(['metadata', 'adCampaignKeyword'], pageData);
 
   /**
@@ -266,8 +266,6 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   MostReadWrapper.propTypes = {
     children: node.isRequired,
   };
-
-  console.log(blocks);
 
   const [headline, timestamp, ...bodyBlocks] = blocks;
   const numberOfCards = 5;

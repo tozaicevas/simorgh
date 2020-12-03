@@ -22,7 +22,9 @@ export const RequestContextProvider = ({
   variant,
   timeOnServer,
   showAdsBasedOnLocation,
+  referrer
 }) => {
+
   const { isUK, origin } = getOriginContext(bbcOrigin);
   const env = getEnv(origin);
   const platform = isAmp ? 'amp' : 'canonical';
@@ -53,6 +55,7 @@ export const RequestContextProvider = ({
     timeOnServer,
     showAdsBasedOnLocation,
     ...getMetaUrls(origin, pathname),
+    referrer,
   };
 
   return (
