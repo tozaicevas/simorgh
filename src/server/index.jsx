@@ -30,6 +30,7 @@ import { NON_200_RESPONSE } from './utilities/customMetrics/metrics.const';
 import local from './local';
 
 const fs = require('fs');
+const urlParse = require('url-parse')
 
 const morgan = require('morgan');
 
@@ -151,10 +152,14 @@ server.get(
         toggles,
       });
 
+      const requestUrl = new urlParse(url, true)
+      const { referrer } = requestUrl.query
+
       data.toggles = toggles;
       data.path = urlPath;
       data.timeOnServer = Date.now();
       data.showAdsBasedOnLocation = headers['bbc-adverts'] === 'true';
+      data.referrer = referrer
 
       const { status } = data;
       // Set derivedPageType based on returned page data

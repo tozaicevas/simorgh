@@ -10,7 +10,7 @@ import usePrevious from '#lib/utilities/usePrevious';
 import getToggles from '#lib/utilities/getToggles';
 import routes from '#app/routes';
 
-const mapToState = ({ pathname, initialData, routeProps, toggles }) => {
+const mapToState = ({ pathname, initialData, routeProps, toggles, referrer }) => {
   const pageType = path(['route', 'pageType'], routeProps);
 
   return mergeAll([
@@ -26,6 +26,7 @@ const mapToState = ({ pathname, initialData, routeProps, toggles }) => {
       pathname,
       pageType,
       toggles,
+      referrer
     },
   ]);
 };
@@ -60,13 +61,15 @@ export const App = ({ location, initialData, bbcOrigin, history }) => {
   const routeProps = getRouteProps(pathname);
   const previousLocationPath = usePrevious(pathname);
   const previousPath = history.action === 'POP' ? null : previousLocationPath; // clear the previous path on back clicks
-  const { showAdsBasedOnLocation, toggles } = initialData;
+  const { showAdsBasedOnLocation, toggles, referrer } = initialData;
+
   const [state, setState] = useState(
     mapToState({
       pathname,
       initialData,
       routeProps,
       toggles,
+      referrer
     }),
   );
   const routeHasChanged = state.pathname !== pathname;

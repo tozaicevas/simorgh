@@ -27,6 +27,7 @@ const WithContexts = Component => {
       timeOnServer,
       pageData,
       showAdsBasedOnLocation,
+      referrer,
     } = props;
 
     return (
@@ -48,6 +49,7 @@ const WithContexts = Component => {
             variant={variant}
             timeOnServer={timeOnServer}
             showAdsBasedOnLocation={showAdsBasedOnLocation}
+            referrer={referrer}
           >
             <EventContextProvider>
               <UserContextProvider>

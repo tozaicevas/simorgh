@@ -172,7 +172,8 @@ const InfiniteStory = ({ pageData }) => {
 };
 
 const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
-  const [showFullStory, setShowFullStory] = useState(false);
+  const { isAmp, showAdsBasedOnLocation, referrer } = useContext(RequestContext);
+  const [showFullStory, setShowFullStory] = useState(referrer != 'social' ? true : false)
   const [isLoading, setIsLoading] = useState(false);
   const [infiniteStories, setInfiniteStories] = useState([]);
 
@@ -257,7 +258,6 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
 
   // ads
   const { enabled: adsEnabled } = useToggle('ads');
-  const { isAmp, showAdsBasedOnLocation } = useContext(RequestContext);
   const adcampaign = path(['metadata', 'adCampaignKeyword'], pageData);
 
   /**

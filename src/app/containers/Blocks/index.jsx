@@ -9,6 +9,7 @@ import {
   oneOfType,
   object,
 } from 'prop-types';
+import AnchorLink from 'react-anchor-link-smooth-scroll'
 
 const Card = styled.div`
   width: 100%;
@@ -39,12 +40,16 @@ const Blocks = ({ blocks, componentsToRender, isCardFormat }) =>
     const { type: typeOfPreviousBlock } = blocks[index - 1] || {};
     return (
       <WrappingComponent key={isCardFormat ? `card-${id}` : id}>
-        <Block
-          position={position}
-          type={type}
-          typeOfPreviousBlock={typeOfPreviousBlock}
-          {...model}
-        />
+        <div id={isCardFormat ? '' : id}>
+          <Block
+            position={position}
+            type={type}
+            typeOfPreviousBlock={typeOfPreviousBlock}
+            {...model}
+          />
+          {isCardFormat && <AnchorLink href={`#${id}`}>See More</AnchorLink>}
+        </div>
+        
       </WrappingComponent>
     );
   });
