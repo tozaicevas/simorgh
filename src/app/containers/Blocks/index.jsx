@@ -66,7 +66,7 @@ const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, sh
     const scrollToId = (setShowFullStory, showFullStory, id) => {
       setShowFullStory(true);
 
-      setTimeout(() => document.getElementById(id).scrollIntoView(), showFullStory ? 0 : 200)
+      setTimeout(() => document.getElementById(id).scrollIntoView({ behavior: "smooth" }), showFullStory ? 0 : 200)
     }
 
     return (

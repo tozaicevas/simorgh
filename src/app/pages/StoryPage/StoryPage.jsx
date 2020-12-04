@@ -221,7 +221,8 @@ const InfiniteStory = ({ pageData }) => {
 
 const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   const { isAmp, showAdsBasedOnLocation, referrer } = useContext(RequestContext);
-  const [showFullStory, setShowFullStory] = useState(referrer != 'social' ? true : false)
+  const [showFullStory, setShowFullStory] = useState(referrer != 'social' ? true : false);
+  const hideCards = referrer === 'search';
   const [isLoading, setIsLoading] = useState(false);
   const [infiniteStories, setInfiniteStories] = useState([]);
 
@@ -266,7 +267,19 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   const featuresInitialData = path(['secondaryColumn', 'features'], pageData);
   const recommendationsInitialData = path(['recommendations'], pageData);
 
-  const infiniteItems = relatedContent.filter(itemToLoad => itemToLoad.cpsType === 'STY');
+  // replace infinite scroll with a load more button if you're on a slow connection.
+  const infiniteMostReadContent = mostReadInitialData.records.map(item => {
+    return {
+      locators: {
+        assetUri: item.promo.locators.assetUri,
+      },
+      cpsType: 'STY',
+    };
+  });
+
+  const infiniteRelatedContent = relatedContent.filter(itemToLoad => itemToLoad.cpsType === 'STY');
+
+  const infiniteItems = referrer === 'search' ? infiniteRelatedContent : infiniteMostReadContent;
 
   const [nextInfiniteItem, setNextInfiniteItem] = useState(0);
 
@@ -524,6 +537,7 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
               componentsToRender={componentsToRender}
             />
             <>
+            {hideCards ? null : (
               <CardTrackWrapper colour={colour}>
                 <CardTrack>
                   <Blocks
@@ -534,15 +548,18 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
                     showFullStory={showFullStory}
                   />
                 </CardTrack>
-              </CardTrackWrapper>
+                </CardTrackWrapper>
+            )}
             </>
             <>
+            {hideCards ? null : (
               <Button
                 type="button"
                 onClick={() => setShowFullStory(!showFullStory)}
               >
                 {showFullStory ? 'Hide Full Story' : 'Show Full Story'}
               </Button>
+                )}
               <FullStorySection show={showFullStory}>
                 <Blocks
                   blocks={bodyBlocks}
@@ -553,10 +570,13 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
             {infiniteStories.map(storyData => (
               <InfiniteStory pageData={storyData} />
             ))}
-            <Loader ref={loaderRef}>{isLoading ? <PuffLoader
+            <Loader ref={loaderRef}>{isLoading ? (
+<PuffLoader
           size={50}
           color={"#11708C"}
-        /> : ''}</Loader>
+        />
+) : ''}
+            </Loader>
           </main>
           {/* <CpsRelatedContent
             content={relatedContent}
