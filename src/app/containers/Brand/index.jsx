@@ -1,9 +1,39 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Brand from '@bbc/psammead-brand';
 import { bool, node } from 'prop-types';
 import { ServiceContext } from '#contexts/ServiceContext';
+import styled from "@emotion/styled"
+import PulseLoader from 'react-spinners/PulseLoader';
 
 const BrandContainer = ({ skipLink, scriptLink, ...props }) => {
+  const [currentPosition, setCurrentPosition] = useState()
+  const [currentWeather, setCurrentWeather] = useState()
+  useEffect(() => {
+    const getLocation = async () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => setCurrentPosition(position.coords));
+      } else { 
+        console.error('this browser doesnt support geolocation')
+      }
+    }
+
+    getLocation()
+  }, [])
+
+  useEffect(() => {
+    const getWeather = async () => {
+      if (currentPosition) {
+        const {latitude, longitude} = currentPosition
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=ed066f80b6580c11d8d0b2fb71691a2c`)
+        const json = await response.json()
+
+        setCurrentWeather(json)
+      }
+    }
+
+    getWeather()
+  }, [currentPosition])
+
   const {
     product,
     serviceLocalizedName,
@@ -19,7 +49,28 @@ const BrandContainer = ({ skipLink, scriptLink, ...props }) => {
   const minWidth = svgRatio * svgMinHeight;
   const maxWidth = svgRatio * svgMaxHeight;
 
+  const BrandWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #B80000;
+  `
+
+  const WeatherIcon = styled.div`
+    margin-right: 16px;
+  `
+
+  const getWeatherIcon = () => {
+    const {weather} = currentWeather
+    // const {description: {icon}} = weather
+    
+    console.log(weather)
+    return '10d'
+  }
+
+
   return (
+    <BrandWrapper>
     <Brand
       backgroundColour={brandBackgroundColour}
       logoColour={brandLogoColour}
@@ -34,6 +85,14 @@ const BrandContainer = ({ skipLink, scriptLink, ...props }) => {
       scriptLink={scriptLink}
       {...props}
     />
+    <WeatherIcon>
+      {currentWeather ? <img src={`http://openweathermap.org/img/wn/${getWeatherIcon()}@2x.png`} height="50px"/> : <PulseLoader
+          size={10}
+          color={"#fff"}
+        />}
+    </WeatherIcon>
+    
+    </BrandWrapper>
   );
 };
 
