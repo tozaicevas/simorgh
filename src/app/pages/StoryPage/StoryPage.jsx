@@ -50,7 +50,6 @@ import CanonicalAdBootstrapJs from '#containers/Ad/Canonical/CanonicalAdBootstra
 import { RequestContext } from '#contexts/RequestContext';
 import useToggle from '#hooks/useToggle';
 import fetchPageData from '../../routes/cpsAsset/getInitialData';
-import Switch from "react-switch";
 
 const MpuContainer = styled(AdContainer)`
   margin-bottom: ${GEL_SPACING_TRPL};
@@ -80,17 +79,54 @@ const CardTrack = styled.div`
   flex-direction: row;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  padding: 16px;
+  padding: 24px;
   width: 100%;
+
+  & ul {
+    list-style-type: disc;
+  }
+
+  & a {
+    text-decoration: underline !important;
+  }
 `;
+
+const colours = ['#B80000', '#11708C', '#D28103'];
 
 const CardTrackWrapper = styled.div`
   overflow-x: hidden;
-  background-color: coral;
+  background-color: ${({ colour }) => colour};
 `;
 
 const FullStorySection = styled.div`
   display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+const Button = styled.button`
+  background: none;
+  font-family: Helmet,Freesans,Helvetica,Arial,sans-serif;
+  font-weight: normal;
+	cursor: pointer;
+	outline: inherit;
+  display: block;
+  color: #3F3F42;
+  border: 1px solid #DB7F7F;
+  font-weight: bold;
+  padding: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+  margin: 24px auto;
+
+  &:hover,
+  &:focus {
+    background: #B80000;
+    color: #FFFFFF;
+  }
+`;
+
+const InfiniteStoryWrapper = styled.div`
+  margin: 24px 0;
+  border-top: 1px solid #d0d0d0;
 `;
 
 const InfiniteStory = ({ pageData }) => {
@@ -146,30 +182,40 @@ const InfiniteStory = ({ pageData }) => {
   const numberOfCards = 5;
   const cardBlocks = bodyBlocks.slice(0, numberOfCards);
 
+  const lastUri = parseInt(assetUri.slice(-1), 10);
+  const colourIndex = (lastUri < 4) ? 0 : (lastUri < 7) ? 1 : 2;
+  const colour = colours[colourIndex];
+
+  console.log(lastUri);
+
   return (
-    <>
+    <InfiniteStoryWrapper>
       <Blocks
         blocks={[headline, timestamp]}
         componentsToRender={componentsToRender}
       />
       <>
-        <Switch onChange={() => setShowFullStory(!showFullStory)} checked={showFullStory} />
-        <CardTrackWrapper>
+        <CardTrackWrapper colour={colour}>
           <CardTrack>
             <Blocks
               blocks={cardBlocks}
               componentsToRender={componentsToRender}
               isCardFormat
+              setShowFullStory={setShowFullStory}
+              showFullStory={showFullStory}
             />
           </CardTrack>
         </CardTrackWrapper>
       </>
       <>
+        <Button type="button" onClick={() => setShowFullStory(!showFullStory)}>
+          {showFullStory ? 'Hide Full Story' : 'Show Full Story'}
+        </Button>
         <FullStorySection show={showFullStory}>
           <Blocks blocks={bodyBlocks} componentsToRender={componentsToRender} />
         </FullStorySection>
       </>
-    </>
+    </InfiniteStoryWrapper>
   );
 };
 
@@ -413,6 +459,10 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
     }
   });
 
+  const lastUri = parseInt(assetUri.slice(-1), 10);
+  const colourIndex = (lastUri < 4) ? 0 : (lastUri < 7) ? 1 : 2;
+  const colour = colours[colourIndex];
+
   return (
     <>
       <CpsMetadata
@@ -463,24 +513,25 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
               componentsToRender={componentsToRender}
             />
             <>
-              <CardTrackWrapper>
+              <CardTrackWrapper colour={colour}>
                 <CardTrack>
                   <Blocks
                     blocks={cardBlocks}
                     componentsToRender={componentsToRender}
                     isCardFormat
-                    setShowFullStory={setShowFullStory} showFullStory={showFullStory}
+                    setShowFullStory={setShowFullStory}
+                    showFullStory={showFullStory}
                   />
                 </CardTrack>
               </CardTrackWrapper>
             </>
             <>
-              <button
+              <Button
                 type="button"
                 onClick={() => setShowFullStory(!showFullStory)}
               >
-                Show Full Story
-              </button>
+                {showFullStory ? 'Hide Full Story' : 'Show Full Story'}
+              </Button>
               <FullStorySection show={showFullStory}>
                 <Blocks
                   blocks={bodyBlocks}

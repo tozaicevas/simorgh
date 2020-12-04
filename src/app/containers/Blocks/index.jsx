@@ -12,10 +12,33 @@ import {
 
 const Card = styled.div`
   width: 100%;
-  margin-right: 16px;
+  margin-right: 24px;
   background-color: #fff;
   flex-shrink: 0;
   scroll-snap-align: center;
+  padding: 16px;
+  box-shadow: 0px 0px 11px #0000005e;
+`;
+
+const Button = styled.button`
+  background: none;
+  font-family: Helmet,Freesans,Helvetica,Arial,sans-serif;
+  font-weight: normal;
+	cursor: pointer;
+	outline: inherit;
+  display: block;
+  color: #3F3F42;
+  border: 1px solid #DB7F7F;
+  font-weight: bold;
+  padding: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    background: #B80000;
+    color: #FFFFFF;
+  }
 `;
 
 const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, showFullStory }) =>
@@ -55,7 +78,7 @@ const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, sh
             typeOfPreviousBlock={typeOfPreviousBlock}
             {...model}
           />
-          {isCardFormat && <button onClick={() => scrollToId(setShowFullStory, showFullStory, id)}>See More</button>}
+          {isCardFormat && <Button onClick={() => scrollToId(setShowFullStory, showFullStory, id)}>See More</Button>}
         </div>
         
       </WrappingComponent>
