@@ -50,6 +50,8 @@ import CanonicalAdBootstrapJs from '#containers/Ad/Canonical/CanonicalAdBootstra
 import { RequestContext } from '#contexts/RequestContext';
 import useToggle from '#hooks/useToggle';
 import fetchPageData from '../../routes/cpsAsset/getInitialData';
+import PuffLoader from 'react-spinners/PuffLoader';
+
 
 const MpuContainer = styled(AdContainer)`
   margin-bottom: ${GEL_SPACING_TRPL};
@@ -266,7 +268,9 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   const featuresInitialData = path(['secondaryColumn', 'features'], pageData);
   const recommendationsInitialData = path(['recommendations'], pageData);
 
-  const [nextRelatedItem, setNextRelatedItem] = useState(0);
+  const infiniteItems = relatedContent;
+
+  const [nextInfiniteItem, setNextInfiniteItem] = useState(0);
 
   const gridColumns = {
     group0: 8,
@@ -420,10 +424,19 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
 
   const cardBlocks = bodyBlocks.slice(0, numberOfCards);
 
+  const Loader = styled.div`
+    height: 60px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  `;
+
   const loaderRef = useRef();
 
   const loadNextArticle = async () => {
-    const itemToLoad = relatedContent[nextRelatedItem];
+    const itemToLoad = infiniteItems[nextInfiniteItem];
 
     if (isLoading) {
       return;
@@ -440,7 +453,7 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
       forceLiveData: true,
     });
 
-    setNextRelatedItem(prev => prev + 1);
+    setNextInfiniteItem(prev => prev + 1);
     setIsLoading(false);
     setInfiniteStories(prev => [...prev, nextStoryData.pageData]);
   };
@@ -542,7 +555,10 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
             {infiniteStories.map(storyData => (
               <InfiniteStory pageData={storyData} />
             ))}
-            <div ref={loaderRef}>{isLoading ? 'Loading...' : 'Load More'}</div>
+            <Loader ref={loaderRef}>{isLoading ? <PuffLoader
+          size={50}
+          color={"#11708C"}
+        /> : ''}</Loader>
           </main>
           {/* <CpsRelatedContent
             content={relatedContent}

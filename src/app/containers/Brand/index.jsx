@@ -3,7 +3,7 @@ import Brand from '@bbc/psammead-brand';
 import { bool, node } from 'prop-types';
 import { ServiceContext } from '#contexts/ServiceContext';
 import styled from "@emotion/styled"
-import PulseLoader from 'react-spinners/PulseLoader';
+import PuffLoader from 'react-spinners/PuffLoader';
 
 const BrandContainer = ({ skipLink, scriptLink, ...props }) => {
   const [currentPosition, setCurrentPosition] = useState()
@@ -61,11 +61,11 @@ const BrandContainer = ({ skipLink, scriptLink, ...props }) => {
   `
 
   const getWeatherIcon = () => {
-    const {weather} = currentWeather
-    // const {description: {icon}} = weather
+    const {weather} = currentWeather;
+    const {icon} = weather[0];
     
     console.log(weather)
-    return '10d'
+    return icon;
   }
 
 
@@ -86,8 +86,8 @@ const BrandContainer = ({ skipLink, scriptLink, ...props }) => {
       {...props}
     />
     <WeatherIcon>
-      {currentWeather ? <img src={`http://openweathermap.org/img/wn/${getWeatherIcon()}@2x.png`} height="50px"/> : <PulseLoader
-          size={10}
+      {currentWeather ? <img src={`http://openweathermap.org/img/wn/${getWeatherIcon()}@2x.png`} height="40px"/> : <PuffLoader
+          size={30}
           color={"#fff"}
         />}
     </WeatherIcon>
