@@ -1,4 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
+import {
+  useNetworkStatus
+} from 'react-adaptive-hooks';
 import { node } from 'prop-types';
 import styled from '@emotion/styled';
 import {
@@ -226,6 +229,9 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [infiniteStories, setInfiniteStories] = useState([]);
 
+  const { effectiveConnectionType } = useNetworkStatus();
+  const supressLazyLoad = ['slow-2g', '2g', '3g'].includes(effectiveConnectionType);
+
   const {
     dir,
     mostRead: { header },
@@ -267,7 +273,6 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   const featuresInitialData = path(['secondaryColumn', 'features'], pageData);
   const recommendationsInitialData = path(['recommendations'], pageData);
 
-  // replace infinite scroll with a load more button if you're on a slow connection.
   const infiniteMostReadContent = mostReadInitialData.records.map(item => {
     return {
       locators: {
@@ -570,13 +575,15 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
             {infiniteStories.map(storyData => (
               <InfiniteStory pageData={storyData} />
             ))}
-            <Loader ref={loaderRef}>{isLoading ? (
-<PuffLoader
-          size={50}
-          color={"#11708C"}
-        />
-) : ''}
-            </Loader>
+            {supressLazyLoad ? <Button type="button" onClick={loadNextArticle}>Load Next Story</Button> : (
+              <Loader ref={loaderRef}>{isLoading ? (
+                <PuffLoader
+                  size={50}
+                  color={"#11708C"}
+                />
+                ) : ''}
+              </Loader>
+            )}
           </main>
           {/* <CpsRelatedContent
             content={relatedContent}
