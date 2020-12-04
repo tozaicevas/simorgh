@@ -188,8 +188,6 @@ const InfiniteStory = ({ pageData }) => {
   const colourIndex = (lastUri < 4) ? 0 : (lastUri < 7) ? 1 : 2;
   const colour = colours[colourIndex];
 
-  console.log(lastUri);
-
   return (
     <InfiniteStoryWrapper>
       <Blocks
@@ -268,7 +266,7 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
   const featuresInitialData = path(['secondaryColumn', 'features'], pageData);
   const recommendationsInitialData = path(['recommendations'], pageData);
 
-  const infiniteItems = relatedContent;
+  const infiniteItems = relatedContent.filter(itemToLoad => itemToLoad.cpsType === 'STY');
 
   const [nextInfiniteItem, setNextInfiniteItem] = useState(0);
 
