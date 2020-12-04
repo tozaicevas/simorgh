@@ -50,6 +50,7 @@ import CanonicalAdBootstrapJs from '#containers/Ad/Canonical/CanonicalAdBootstra
 import { RequestContext } from '#contexts/RequestContext';
 import useToggle from '#hooks/useToggle';
 import fetchPageData from '../../routes/cpsAsset/getInitialData';
+import Switch from "react-switch";
 
 const MpuContainer = styled(AdContainer)`
   margin-bottom: ${GEL_SPACING_TRPL};
@@ -79,10 +80,13 @@ const CardTrack = styled.div`
   flex-direction: row;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
+  padding: 16px;
+  width: 100%;
 `;
 
 const CardTrackWrapper = styled.div`
   overflow-x: hidden;
+  background-color: coral;
 `;
 
 const FullStorySection = styled.div`
@@ -149,6 +153,7 @@ const InfiniteStory = ({ pageData }) => {
         componentsToRender={componentsToRender}
       />
       <>
+        <Switch onChange={() => setShowFullStory(!showFullStory)} checked={showFullStory} />
         <CardTrackWrapper>
           <CardTrack>
             <Blocks
@@ -160,9 +165,6 @@ const InfiniteStory = ({ pageData }) => {
         </CardTrackWrapper>
       </>
       <>
-        <button type="button" onClick={() => setShowFullStory(!showFullStory)}>
-          Show Full Story
-        </button>
         <FullStorySection show={showFullStory}>
           <Blocks blocks={bodyBlocks} componentsToRender={componentsToRender} />
         </FullStorySection>
@@ -467,6 +469,7 @@ const StoryPage = ({ pageData, mostReadEndpointOverride }) => {
                     blocks={cardBlocks}
                     componentsToRender={componentsToRender}
                     isCardFormat
+                    setShowFullStory={setShowFullStory} showFullStory={showFullStory}
                   />
                 </CardTrack>
               </CardTrackWrapper>
