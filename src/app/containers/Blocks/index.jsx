@@ -41,6 +41,16 @@ const Button = styled.button`
   }
 `;
 
+const CSSHack = styled.div`
+  & ul {
+    list-style-type: disc;
+  }
+
+  & a {
+    text-decoration: underline !important;
+  }
+`;
+
 const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, showFullStory }) =>
   blocks.map((block, index) => {
     if (!block) {
@@ -71,7 +81,7 @@ const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, sh
 
     return (
       <WrappingComponent key={isCardFormat ? `card-${id}` : id}>
-        <div id={isCardFormat ? '' : id}>
+        <CSSHack id={isCardFormat ? '' : id}>
           <Block
             position={position}
             type={type}
@@ -79,8 +89,7 @@ const Blocks = ({ blocks, componentsToRender, isCardFormat, setShowFullStory, sh
             {...model}
           />
           {isCardFormat && <Button onClick={() => scrollToId(setShowFullStory, showFullStory, id)}>See More</Button>}
-        </div>
-        
+        </CSSHack>
       </WrappingComponent>
     );
   });
