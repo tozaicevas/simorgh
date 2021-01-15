@@ -2,24 +2,23 @@
   "extends": ["config:base"],
   "packageRules": [
     {
-      "packagePatterns": [
-        "*"
-      ],
-      "excludePackagePatterns": ["^@bbc"],
-      "updateTypes": [
-        "minor",
-        "patch"
-      ],
+      "packagePatterns": ["*"],
+      "excludePackagePatterns": ["^@bbc", "^\\.github/workflows/[^/]+.ya?ml$"],
+      "updateTypes": ["minor", "patch"],
       "groupName": "all 3rd party non-major dependencies",
       "groupSlug": "all-minor-patch"
     },
     {
-      "packagePatterns": [
-        "^@bbc"
-      ],
+      "packagePatterns": ["^@bbc"],
       "groupName": "all BBC non-major dependencies",
       "updateTypes": ["minor", "patch"],
       "groupSlug": "psammead-minor-patch"
+    },
+    {
+      "packagePatterns": ["^\\.github/workflows/[^/]+.ya?ml$"],
+      "groupName": "github action updates",
+      "updateTypes": ["minor", "patch"],
+      "groupSlug": "github-actions"
     }
   ]
 }
