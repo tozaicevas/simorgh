@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
+import _ from 'lodash';
 import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { string, node } from 'prop-types';
 import path from 'ramda/src/path';
@@ -26,6 +27,8 @@ import MostReadSection from '#containers/MostRead/section';
 import MostReadSectionLabel from '#containers/MostRead/label';
 import CanonicalAdBootstrapJs from '#containers/Ad/Canonical/CanonicalAdBootstrapJs';
 import { NEGATIVE_MARGIN } from '#lib/styles.const';
+import mockPageData from './mockPageData';
+import juventusStory from './juventusStory';
 
 const FrontPageMostReadSection = styled(MostReadSection)`
   /* To centre page layout for Group 4+ */
@@ -59,16 +62,25 @@ MostReadWrapper.propTypes = {
   children: node.isRequired,
 };
 
-const RandomizedText = ({ values }) => {
-  console.log('RandomizedText()');
+const getUpdatedGroup = (group, story) => {
+  return {
+    ...group,
+    items: [story, ...group.items],
+  };
+};
 
-  return (
-    <div>
-      {values.map((x, index) => (
-        <div key={index}>{x}</div>
-      ))}
-    </div>
-  );
+const updateStoryId = story => {
+  return {
+    ...story,
+    id: `${story.id}${Math.random()}`,
+  };
+};
+
+const getUpdatedGroups = groups => {
+  return [
+    getUpdatedGroup(groups[0], updateStoryId(juventusStory)),
+    ...groups.slice(1),
+  ];
 };
 
 const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
@@ -79,25 +91,23 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
     frontPageTitle,
   } = useContext(ServiceContext);
 
-  const [a, setA] = useState(0);
-  const [b, setB] = useState(0);
-  const [c, setC] = useState(0);
-  const [d, setD] = useState(0);
-  const [e, setE] = useState(0);
+  // console.log('FrontPage()');
+  // console.log('mockPageData:', mockPageData);
+  // console.log('additionalPageData: ', additionalMockPageData);
+
+  const [groups, setGroups] = useState(mockPageData);
 
   useEffect(() => {
     setTimeout(() => {
-      setA(Math.random());
-      setB(Math.random());
-      setC(Math.random());
-      setD(Math.random());
-      setE(Math.random());
+      _.times(13, () => {
+        setGroups(getUpdatedGroups);
+      });
     }, 1000);
   }, []);
 
   const { enabled: adsEnabled } = useToggle('ads');
   const home = path(['home'], translations);
-  const groups = path(['content', 'groups'], pageData);
+
   const lang = path(['metadata', 'language'], pageData);
   const description = path(['metadata', 'summary'], pageData);
   const seoTitle = path(['promo', 'name'], pageData);
@@ -119,9 +129,8 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
     findIndex(group => group.type === 'useful-links')(groups) > -1;
 
   return (
-    <>
+    <div>
       {/* dotcom and dotcomConfig need to be setup before the main dotcom javascript file is loaded */}
-      <RandomizedText values={[a, b, c, d, e]} />
       {adsEnabled && showAdsBasedOnLocation && !isAmp && (
         <CanonicalAdBootstrapJs />
       )}
@@ -157,7 +166,7 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
           {!hasUsefulLinks && renderMostRead(mostReadEndpointOverride)}
         </IndexPageContainer>
       </main>
-    </>
+    </div>
   );
 };
 
