@@ -91,14 +91,12 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
     frontPageTitle,
   } = useContext(ServiceContext);
 
-  // console.log('FrontPage()');
-  // console.log('mockPageData:', mockPageData);
-  // console.log('additionalPageData: ', additionalMockPageData);
-
   const [groups, setGroups] = useState(mockPageData);
 
   useEffect(() => {
+    console.time('useEffect()');
     setTimeout(() => {
+      console.timeEnd('useEffect()');
       _.times(13, () => {
         setGroups(getUpdatedGroups);
       });
