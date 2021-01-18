@@ -1,4 +1,6 @@
-import React, { Fragment, useContext } from 'react';
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/prop-types */
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { string, node } from 'prop-types';
 import path from 'ramda/src/path';
 import findIndex from 'ramda/src/findIndex';
@@ -57,6 +59,18 @@ MostReadWrapper.propTypes = {
   children: node.isRequired,
 };
 
+const RandomizedText = ({ values }) => {
+  console.log('RandomizedText()');
+
+  return (
+    <div>
+      {values.map((x, index) => (
+        <div key={index}>{x}</div>
+      ))}
+    </div>
+  );
+};
+
 const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
   const {
     product,
@@ -64,6 +78,22 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
     translations,
     frontPageTitle,
   } = useContext(ServiceContext);
+
+  const [a, setA] = useState(0);
+  const [b, setB] = useState(0);
+  const [c, setC] = useState(0);
+  const [d, setD] = useState(0);
+  const [e, setE] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setA(Math.random());
+      setB(Math.random());
+      setC(Math.random());
+      setD(Math.random());
+      setE(Math.random());
+    }, 1000);
+  }, []);
 
   const { enabled: adsEnabled } = useToggle('ads');
   const home = path(['home'], translations);
@@ -91,6 +121,7 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
   return (
     <>
       {/* dotcom and dotcomConfig need to be setup before the main dotcom javascript file is loaded */}
+      <RandomizedText values={[a, b, c, d, e]} />
       {adsEnabled && showAdsBasedOnLocation && !isAmp && (
         <CanonicalAdBootstrapJs />
       )}
