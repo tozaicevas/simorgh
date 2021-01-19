@@ -94,9 +94,9 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
   const [groups, setGroups] = useState(mockPageData);
 
   useEffect(() => {
-    console.time('useEffect()');
+    console.time('useEffect() 13');
     setTimeout(() => {
-      console.timeEnd('useEffect()');
+      console.timeEnd('useEffect() 13');
       _.times(13, () => {
         setGroups(getUpdatedGroups);
       });

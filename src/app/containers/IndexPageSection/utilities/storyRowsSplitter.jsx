@@ -16,7 +16,6 @@ const splitFirstRow = (items, isFirstSection) => {
 // Split into fours and make sure slices only go through if a four
 const splitStandardRows = items =>
   splitEvery(4, items).filter(itemList => itemList.length === 4);
-
 // Anything beyond the first 2 fours goes into an imageless slice
 const splitNoImageRow = standardSlices => [
   standardSlices.slice(0, 2),
@@ -34,6 +33,9 @@ const getRows = ({ items, isFirstSection, showAllPromos }) => {
   } else {
     [regularRows, [noImageRow]] = splitNoImageRow(standardRows);
   }
+
+  regularRows = standardRows;
+  noImageRow = [];
 
   return {
     firstRow,
