@@ -658,6 +658,39 @@ export default [
         type: 'link',
         id: 'dee4046f-89de-4c1f-8c37-4e05cc7bcafc',
       },
+      {
+        name: 'Why this man became a hermit at 20',
+        indexImage: {
+          id: '107882083',
+          subType: 'index',
+          href:
+            'http://c.files.bbci.co.uk/948C/production/_107882083_courtgetty2013_976549.jpg',
+          path:
+            '/cpsprodpb/948C/production/_107882083_courtgetty2013_976549.jpg',
+          height: 261,
+          width: 464,
+          altText: 'Christopher Knight',
+          copyrightHolder: 'Getty Images',
+        },
+        indexThumbnail: {
+          id: '107882081',
+          subType: 'index-thumbnail',
+          href:
+            'http://c.files.bbci.co.uk/466C/production/_107882081_courtgetty2013_976549.jpg',
+          path:
+            '/cpsprodpb/466C/production/_107882081_courtgetty2013_976549.jpg',
+          height: 180,
+          width: 320,
+          altText: 'Christopher Knight',
+          copyrightHolder: 'Getty Images',
+        },
+        uri: 'https://www.bbc.co.uk/news/stories-48968502',
+        contentType: 'Feature',
+        assetTypeCode: 'PRO',
+        timestamp: 1563176137000,
+        type: 'link',
+        id: '2dc92ce0-ef73-4eab-b0cc-ebc3bd0700db',
+      },
     ],
   },
   {
