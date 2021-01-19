@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import _ from 'lodash';
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { string, node } from 'prop-types';
 import path from 'ramda/src/path';
 import findIndex from 'ramda/src/findIndex';
@@ -62,6 +62,17 @@ MostReadWrapper.propTypes = {
   children: node.isRequired,
 };
 
+const randomBetween = (min, max) => Math.floor(Math.random() * (max - 1)); // [min, max]
+
+const getRandomImage = groups => {
+  const group = groups[randomBetween(0, groups.length - 1)];
+  const { items } = group;
+  const randomItem = items[randomBetween(0, items.length - 1)];
+  return randomItem.indexImage
+    ? randomItem.indexImage.path
+    : randomItem.imageThumbnail.path;
+};
+
 const getUpdatedGroup = (group, story) => {
   return {
     ...group,
@@ -76,9 +87,28 @@ const updateStoryId = story => {
   };
 };
 
+const updateImage = (story, groups) => {
+  const newImage = getRandomImage(groups);
+
+  return {
+    ...story,
+    indexImage: {
+      ...story.indexImage,
+      path: newImage,
+    },
+    imageThumbnail: {
+      ...story.imageThumbnail,
+      path: newImage,
+    },
+  };
+};
+
 const getUpdatedGroups = groups => {
   return [
-    getUpdatedGroup(groups[0], updateStoryId(juventusStory)),
+    getUpdatedGroup(
+      groups[0],
+      updateImage(updateStoryId(juventusStory), groups),
+    ),
     ...groups.slice(1),
   ];
 };
@@ -92,16 +122,7 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
   } = useContext(ServiceContext);
 
   const [groups, setGroups] = useState(mockPageData);
-
-  useEffect(() => {
-    console.time('useEffect() 13');
-    setTimeout(() => {
-      console.timeEnd('useEffect() 13');
-      _.times(13, () => {
-        setGroups(getUpdatedGroups);
-      });
-    }, 1000);
-  }, []);
+  const [inputText, setInputText] = useState('');
 
   const { enabled: adsEnabled } = useToggle('ads');
   const home = path(['home'], translations);
@@ -126,8 +147,32 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
   const hasUsefulLinks =
     findIndex(group => group.type === 'useful-links')(groups) > -1;
 
+  const handleInputTextChange = event => {
+    setInputText(event.target.value);
+    _.times(13, () => {
+      setGroups(getUpdatedGroups);
+    });
+  };
+
   return (
     <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ paddingTop: 16 }}>
+          Add stories:{' '}
+          <input
+            type="text"
+            value={inputText}
+            onChange={handleInputTextChange}
+            name="add_stories"
+          />
+        </div>
+      </div>
       {/* dotcom and dotcomConfig need to be setup before the main dotcom javascript file is loaded */}
       {adsEnabled && showAdsBasedOnLocation && !isAmp && (
         <CanonicalAdBootstrapJs />
