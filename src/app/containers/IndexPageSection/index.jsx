@@ -21,7 +21,6 @@ import { ServiceContext } from '#contexts/ServiceContext';
 import groupShape from '#models/propTypes/frontPageGroup';
 import idSanitiser from '#lib/utilities/idSanitiser';
 import {
-  getAllowedItems,
   removeFirstSlotRadioBulletin,
   removeTVBulletinsIfNotAVLiveStream,
   removeItemsWithoutUrlOrHeadline,
@@ -97,6 +96,7 @@ const parentGridColumns = {
 
 const renderPromos = ({ items, isFirstSection, dir, showAllPromos }) => {
   const rows = getRows({ items, isFirstSection, showAllPromos });
+
   const rowsDetails = getRowDetails(rows);
 
   // Don't use StoryPromoUl and Li if there is only one story in one row
@@ -186,11 +186,7 @@ const IndexPageSection = ({ bar, group, sectionNumber, showAllPromos }) => {
   const items = removeItemsWithoutUrlOrHeadline(bulletinFilteredItems);
 
   // We have a cap on the number of allowed items per section
-  const allowedItems = getAllowedItems({
-    items,
-    isFirstSection,
-    showAllPromos,
-  });
+  const allowedItems = items;
 
   // The current implementation of SectionLabel *requires* a strapline to be
   // present in order to render. It is currently *not possible* to render a

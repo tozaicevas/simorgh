@@ -4,7 +4,7 @@ import {
   getHeadlineUrlAndLive,
 } from '#lib/utilities/getStoryPromoInfo';
 
-const MAX_ALLOWED_ITEMS_FIRST_SECTION = 13;
+const MAX_ALLOWED_ITEMS_FIRST_SECTION = 150;
 const MAX_ALLOWED_ITEMS = 10;
 
 export const getAllowedItems = ({ items, isFirstSection, showAllPromos }) => {
