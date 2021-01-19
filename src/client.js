@@ -18,7 +18,9 @@ const root = document.getElementById('root');
 // and window location agree what the path is. Otherwise, fallback to the SSR.
 if (window.SIMORGH_DATA.path === window.location.pathname) {
   loadableReady(() => {
-    ReactDOM.render(<ClientApp data={data} routes={routes} />, root);
+    ReactDOM.unstable_createRoot(root).render(
+      <ClientApp data={data} routes={routes} />,
+    );
   });
 } else {
   logger.warn(`
