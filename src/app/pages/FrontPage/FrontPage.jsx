@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 import _ from 'lodash';
@@ -149,9 +150,9 @@ const FrontPage = ({ pageData, mostReadEndpointOverride }) => {
 
   const handleInputTextChange = event => {
     setInputText(event.target.value);
-    _.times(13, () => {
-      setGroups(getUpdatedGroups);
-    });
+    // _.times(13, () => {
+    //   setGroups(getUpdatedGroups);
+    // });
   };
 
   return (
